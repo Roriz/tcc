@@ -1,0 +1,99 @@
+<div ng-controller="LicenciamentoLiLoEditCtrl">
+  <form name="crudForm" novalidate data-form-validate-exit ng-submit="search()">
+  
+    <div layout="column" ng-cloak>
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Incluir Licença</h2>
+        </div>
+      </md-toolbar>
+      <md-content flex layout-padding>    
+
+        <div layout="column" ng-cloak>
+          <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+              <h2 class="md-flex">Processo</h2>
+            </div>
+          </md-toolbar>
+          <md-content flex layout-padding>
+            <div class="row">
+              <div class="formField col-md-12">
+                <label for="tb_requerente.name">Processo: <required/></label>
+                <input 
+                  id="ibram_processo" 
+                  name="ibram_processo" 
+                  ng-model="model.ibram_processo" 
+                  autocomplete="off" 
+                  ui-mask-placeholder  
+                  model-view-value="true" 
+                  ui-mask='999999999999/999999999' 
+                  required 
+                  ng-change="model.showDetails = false"/>
+              </div>
+            </div>
+            <div class="row formButtons">
+              <button class="btn btnDefault" ng-disabled="crudForm.$invalid">Buscar</button>
+            </div>
+          </md-content>
+        </div>
+
+
+
+
+        <div layout="column" ng-cloak ng-if="model.showDetails">
+          <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+              <h2 class="md-flex">Dados da Licença</h2>
+            </div>
+          </md-toolbar>
+          <md-content flex layout-padding>
+            <div class="row">
+              <div class="formField col-md-12">
+                <label for="tb_requerente.name">Protocolo: </label>
+                {{model.ibram_processo}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="formField col-md-12">
+                <label for="tb_requerente.name">Empresa: </label>
+                {{model.tb_requerente.name}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="formField col-md-12">
+                <label for="tb_requerente.name">Responsável: </label>
+                {{model.tb_requerente.responsavel}}
+              </div>
+            </div>
+
+
+            <div class="row formButtons">
+              <button class="btn btnDefault pull-right" ng-click="include()">Incluir</button>
+            </div>
+            <div class="row">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Licençca</th>
+                    <th>Data Solicitação</th>
+                    <th>Situação</th>
+                    <th>Avaliação</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="status in model.tb_licenciamento_status">
+                    <td>{{status.td_tipos_licenciamento}}</td>
+                    <td>{{status.dta}}</td>
+                    <td>{{status.tb_avaliacao.td_tipos_avaliacao}}</td>
+                    <td>{{status.tb_avaliacao.observacao}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </md-content>
+        </div>
+      </md-content>
+    </div>
+
+  </form>
+</div>

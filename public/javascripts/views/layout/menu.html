@@ -1,0 +1,24 @@
+<div ng-controller="MenuCtrl as menuctrl">
+    <a data-send-to-default>LICAGRO</a>
+
+    <ul class="menu">
+        <li ng-repeat="menu in menuctrl.menus.list" ng-show="!menu.hidden" ng-attr-class="{{menu.selected ? 'menu-item selected' : 'menu-item'}}" ng-include="'menu_item.html'"></li>
+    </ul>
+    <!-- <a href="/auth/logout" class="logout">
+        <img ng-src="{{'/images/leftPin.png'}}">
+        <i class="icon iconLogout"></i>
+    </a> -->
+
+
+
+
+    <script type="text/ng-template" id="menu_item.html">
+        <a ng-attr-href="{{menu.href}}" class="menu-item-content" ng-click="menu.displaySubmenu = !menu.displaySubmenu; (menu.href?menuctrl.menus.selectMenu($event):'');">
+            <i ng-if="menu.icon" class="{{menu.icon}}"></i>
+            <span>{{menu.name}}</span>
+        </a>
+        <ul ng-if="menu.subMenu" class="subMenu" ng-show="menu.displaySubmenu">
+            <li ng-repeat="menu in menu.subMenu" ng-hide="menu.hidden" ng-include="'menu_item.html'" ng-attr-class="{{menu.selected ? 'menu-item selected' : 'menu-item'}}"></li>
+        </ul>
+    </script>
+</div>

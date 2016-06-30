@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<style type="text/css">
+		
+		html, body{
+			height: 100%;
+		}
+
+	</style>
+
+</head>
+
+
+<body class="blackBackbound">
+	<div class="loginForm">
+		<div class="logo">
+			<img src="/images/logo-bigger.png">
+		</div>
+
+		<div class="row formField">
+			<span class="error hide" data-error="1">Generic Error</span>
+			<span class="error hide" data-error="2">E-mail não encontrado ou inválido</span>
+			<span class="error hide" data-error="3">E-mail não foi enviado por um problema do servidor</span>
+			<span class="success hide">E-mail enviado.</span>
+		</div>
+
+		<form class="LoginInputs" method="POST" action="/auth/forgot-passord">
+			
+			<div class="row formField">
+				<input name="username" class="inputBlack iconInput iconUser" />
+			</div>
+			
+			<div class="formButtons">
+				<button class="btn btnClear btnRow btnDefault">Enviar</button>
+			</div>
+		
+			<div class="formLinks">
+				<a href="/auth">Login</a>
+			</div>
+		</form>
+
+		<script type="text/javascript">
+			function getUrlVars() {
+				var vars = {};
+				var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+					vars[key] = value;
+				});
+				return vars;
+			}
+			if(getUrlVars()["success"]){
+				$('.success').removeClass('hide');
+			}else if(getUrlVars()["error"]){
+				$('.error[data-error='+getUrlVars()["error"]+']').removeClass('hide');
+			}
+		</script>
+
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+<div class="row">
+  <div layout="column" ng-cloak class="col-md-4" style="height: 300px;">
+    <md-toolbar class="md-primary">
+      <div class="md-toolbar-tools">
+        <h2 class="md-flex">Solicitação para obtenção</h2>
+      </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+      <div class="row">
+        <div class="formField col-md-12">
+            {{model.tb_licenciamento_status.td_tipos_licenciamento}}
+        </div>
+      </div>
+    </md-content>
+  </div>
+
+  <div layout="column" ng-cloak class="col-md-8">
+    <md-toolbar class="md-primary">
+      <div class="md-toolbar-tools">
+        <h2 class="md-flex">PROCESSO Nº</h2>
+      </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+      <div class="row">
+        <div class="formField col-md-12">
+            {{model.ibram_processo}}
+        </div>
+      </div>
+    </md-content>
+  </div>
+
+  <div layout="column" ng-cloak class="col-md-8">
+    <md-toolbar class="md-primary">
+      <div class="md-toolbar-tools">
+        <h2 class="md-flex">PRORROGAÇÃO Nº</h2>
+      </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+      <div class="row">
+        <div class="formField col-md-12">
+            {{model.prorrogacao_processo}}
+        </div>
+      </div>
+    </md-content>
+  </div>
+
+  <div layout="column" ng-cloak class="col-md-8">
+    <md-toolbar class="md-primary">
+      <div class="md-toolbar-tools">
+        <h2 class="md-flex">RENOVAÇÃO Nº</h2>
+      </div>
+    </md-toolbar>
+    <md-content flex layout-padding>
+      <div class="row">
+        <div class="formField col-md-12">
+            {{model.renovacao_processo}}
+        </div>
+      </div>
+    </md-content>
+  </div>
+</div>
+
+<div layout="column" ng-cloak>
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Dados do Requerente</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex layout-padding>
+    <div class="row">
+      <div class="formField col-md-12">
+        <label for="tb_requerente.name">Nome: <required/></label>
+        {{model.tb_requerente.name}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="formField col-md-6">
+        <label for="tb_requerente.cpf_cnpj">CPF/CNPJ: <required/></label>
+        {{model.tb_requerente.cpf_cnpj}}
+      </div>
+      <div class="formField col-md-6">
+        <label for="tb_requerente.cf_df">CF/DF: <required/></label>
+        {{model.tb_requerente.cf_df}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="formField col-md-12">
+        <label for="tb_requerente.tb_locadouro.endereco">Endereço: <required/></label>
+        {{model.tb_requerente.tb_locadouro.endereco}}
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="formField col-md-4">
+        <label for="tb_requerente.tb_locadouro.bairro">Bairro: <required/></label>
+        {{model.tb_requerente.tb_locadouro.bairro}}
+      </div>
+      <div class="formField col-md-4">
+        <label for="tb_requerente.tb_locadouro.cidade">Cidade/RA: <required/></label>
+        {{model.tb_requerente.tb_locadouro.cidade}}
+      </div>
+      <div class="formField col-md-4">
+        <label for="tb_requerente.telefone">Telefone: <required/></label>
+        {{model.tb_requerente.telefone}}
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="formField col-md-12">
+        <label for="tb_requerente.responsavel">Responsável: <required/></label>
+        {{model.tb_requerente.responsavel}}
+      </div>
+    </div>
+      
+    <div class="row">
+      <div class="formField col-md-7">
+        <label for="tb_requerente.email">E-mail: <required/></label>
+        {{model.tb_requerente.email}}
+      </div>
+      <div class="formField col-md-2">
+        <label for="tb_requerente.rg">RG: <required/></label>
+        {{model.tb_requerente.rg}}
+      </div>
+      <div class="formField col-md-3">
+        <label for="tb_requerente.cpf">CPF: <required/></label>
+        {{model.tb_requerente.cpf}}
+      </div>
+    </div>
+  </md-content>
+</div>
+
+<div layout="column" ng-cloak>
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Endereço para correspondência</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex layout-padding>
+    <div class="row">
+      <div class="formField col-md-12">
+        <label for="tb_requerente.tb_correspondencia.name">Nome do destinatário: <required/></label>
+        {{model.tb_requerente.tb_correspondencia.name}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="formField col-md-12">
+        <label for="tb_requerente.tb_correspondencia.tb_locadouro.endereco">Endereço: <required/></label>
+        {{model.tb_requerente.tb_correspondencia.tb_locadouro.endereco}}
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="formField col-md-4">
+        <label for="tb_requerente.tb_correspondencia.tb_locadouro.cidade">Cidade/RA: <required/></label>
+        {{model.tb_requerente.tb_correspondencia.tb_locadouro.cidade}}
+      </div>
+      <div class="formField col-md-4">
+        <label for="tb_requerente.tb_correspondencia.tb_locadouro.cep">CEP: <required/></label>
+        {{model.tb_requerente.tb_correspondencia.tb_locadouro.cep}}
+      </div>
+      <div class="formField col-md-4">
+        <label for="tb_requerente.tb_correspondencia.telefone">Telefone: <required/></label>
+        {{model.tb_requerente.tb_correspondencia.telefone}}
+      </div>
+    </div>
+  </md-content>
+</div>
+
+<div layout="column" ng-cloak>
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Dados do Empreendimento</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex layout-padding>
+    <md-subheader class="md-primary">Indicação de referências (se área rural, apresentar mapa com os acessos)</md-subheader>
+    <div class="row">
+      <div class="formField col-md-12">
+        <label for="tb_requerente.tb_empreendimento.localizacao">Localização: <required/></label>
+        {{model.tb_requerente.tb_empreendimento.localizacao}}
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="formField col-md-4">
+        <label for="tb_requerente.tb_empreendimento.tb_locadouro.bairro">Bairro: <required/></label>
+        {{model.tb_requerente.tb_empreendimento.tb_locadouro.bairro}}
+      </div>
+      <div class="formField col-md-4">
+        <label for="tb_requerente.tb_empreendimento.tb_locadouro.cidade">Cidade/RA: <required/></label>
+        {{model.tb_requerente.tb_empreendimento.tb_locadouro.cidade}}
+      </div>
+      <div class="formField col-md-4">
+        <label for="tb_requerente.tb_empreendimento.tb_locadouro.cep">CEP: <required/></label>
+        {{model.tb_requerente.tb_empreendimento.tb_locadouro.cep}}
+      </div>
+    </div>
+  </md-content>
+</div>
+
+<div layout="column" ng-cloak>
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Tipo de atividade / Empreendimento</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex layout-padding>
+    <div class="row">
+      <div class="formField col-md-12">
+        <label for="tb_requerente.td_tipo_atividade">Tipo da atividade: <required/></label>
+        {{model.tipo_atividade}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="formField col-md-2">
+        <label for="tb_requerente.atividade_area">Área: <required/></label>
+        {{model.tb_requerente.atividade_area}}
+      </div>
+      <div class="formField col-md-10">
+        <label for="tb_requerente.atividade_descricao">Descrição resumida das atividades: <required/></label>
+        {{model.tb_requerente.atividade_descricao}}
+      </div>
+    </div>
+  </md-content>
+</div>
+
+<div layout="column" ng-cloak>
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <h2 class="md-flex">Caracteristicas Basicas</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex layout-padding>
+    <div class="row">
+      <div class="formField col-md-3">
+        <label for="fase_empreendimento">Fase Empreendimento: <required/></label>
+        {{model.fase_empreendimento}}
+      </div>
+      <div class="formField col-md-3">
+        <label for="situacao_imovel">Situacao imóvel: <required/></label>
+        {{model.situacao_imovel}}
+      </div>
+      <div class="formField col-md-3">
+        <label for="abastecimento_agua">Abastecimento Água: <required/></label>
+        {{model.abastecimento_agua}}
+      </div>
+      <div class="formField col-md-3">
+        <label for="efluente_liquido">Efluente liquido: <required/></label>
+        {{model.efluente_liquido}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="formField col-md-3">
+        <label for="destino_lixo">Destino Lixo: <required/></label>
+        {{model.destino_lixo}}
+      </div>
+      <div class="formField col-md-3">
+        <label for="destino_efluente">Destino efluente: <required/></label>
+        {{model.destino_efluente}}
+      </div>
+      <div class="formField col-md-3">
+        <label for="tipo_lixo_gerado">Tipo lixo gerado: <required/></label>
+        {{model.tipo_lixo_gerado}}
+      </div>
+    </div>
+  </md-content>
+</div>

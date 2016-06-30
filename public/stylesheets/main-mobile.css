@@ -1,0 +1,141 @@
+
+@media screen and (max-width: 768px) {
+	body{
+		font-size: 9px !important;
+	}
+
+	menu {
+		width: 30px !important;
+		padding: 6px !important;
+	}
+	menu .logo{
+		width: inherit;
+	}
+
+	menu:not(.ng-hide) ~ layout{
+		margin-left: 40px !important;
+		width: calc(100% - 40px) !important;
+	}
+
+	.menu{
+    	margin: 30px -6px 0 -6px !important;
+    	width: calc(100% + 12px) !important;;
+	}
+
+
+	.menu span,
+	.header-userInfo img,
+	footer,
+	.logout,
+	.layout-footer,
+	select[data-selecttwo],
+	.breadCrumb{
+		display: none;
+	}
+
+	input[type=search]{
+		padding: 5px 0 5px 33px !important;
+	}
+	.btn{
+	    padding: 5px 0;
+	    min-width: 80px !important;
+	}
+	.title .btn{
+		margin-left: 10px !important;
+	}
+
+
+	.ag-header{
+	    height: 27px !important;
+	}
+	.ag-header-cell{
+		padding: 10px 0;
+	}
+
+	.layout-body{
+	    max-height: calc(100vh - 60px) !important;
+	}
+	menu:not(.ng-hide) ~ layout #content{
+	    width: calc(100vw - 40px) !important;;
+	}
+	#content{
+	    padding: 5px 10px !important;
+		width: 100%;
+	}
+
+	.grid-paginate li{
+		padding: 0 9px !important;
+	}
+
+	.title{
+		flex-wrap: wrap;
+    	justify-content: space-around !important;;
+	}
+		.title h4{
+			width: 100%;
+			margin-bottom: 10px !important;
+		}
+	.title .flex-right{
+		margin-top: 10px !important;
+		width: 100%;
+		text-align: center;
+	}
+	
+	h4{
+		font-size: 1.2em !important;;
+	}
+
+	.row [class*='col-md']:first-child:not(input){
+		padding-left: 15px !important;
+	}
+
+	.row [class*='col-md'] [class*='col-md']{
+		padding: 0 !important;
+	}
+
+	.profileImg{
+		width: 100px !important;
+		max-height: 120px !important;
+	    margin-right: 30%;
+	}
+
+	.angular-openlayers-map:not(full-screen){
+		max-height: 250px !important;
+	}
+
+	.ng-isolate-scope .table{
+	    width: calc(100% + 30px) !important;
+	    max-width: calc(100% + 30px) !important;
+	}
+
+	.subMenu .menu-item-content{
+		padding-left: 6px !important;
+	}
+	.mapResponse{
+		flex-wrap: wrap;
+	}
+		.mapResponse .map,
+		.mapResponse .realTime,
+		.mapResponse .lastMinutes{
+		    flex-basis: 100% !important;;
+		}
+	.header-hamburgerMenu .icon{
+		left: 10px !important;
+		right: inherit;
+	}
+
+
+	.menu-item .menu-item-content{
+		padding: 3px 0 3px 0px !important;
+	}
+
+	.row [class*='col-md']:last-child:not(input){
+		padding-right: 15px !important;
+	}
+
+	.menu-item .fa{
+    font-size: 16px !important;
+    padding-left: 7px !important;
+    color: #fff;
+	}
+}

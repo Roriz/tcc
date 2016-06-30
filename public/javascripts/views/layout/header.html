@@ -1,0 +1,14 @@
+<header ng-controller="HeaderCtrl as headerctrl">
+    <div class="header-hamburgerMenu">
+        <i class="icon iconHamburgerMenu" ng-click="layout.changeHanburger()"></i>
+    </div>
+    <div>
+        <ul class="breadCrumb">
+            <li ng-repeat="bread in headerctrl.menus.bread">{{bread}}</li>
+        </ul>
+    </div>
+    <div class="header-userInfo">
+        <img ng-src="/images/default-img.png"/>
+        <span data-user-name>{{user.email}}</span>
+    </div>
+</header>

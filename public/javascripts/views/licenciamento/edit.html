@@ -1,0 +1,304 @@
+<div>
+  <form name="crudForm" novalidate data-form-validate-exit ng-submit="send(model)">
+    
+    <div class="row">
+      <div layout="column" ng-cloak class="col-md-6">
+        <md-toolbar class="md-primary">
+          <div class="md-toolbar-tools">
+            <h2 class="md-flex">Solicitação para obtenção</h2>
+          </div>
+        </md-toolbar>
+        <md-content flex layout-padding>
+          <div class="row">
+            <div class="formField col-md-6">
+              <md-radio-group required ng-model="model.tb_licenciamento_status.td_tipos_licenciamento">
+                <md-radio-button ng-repeat="value in tipos_licenciamento" disabled value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              </md-radio-group>
+            </div>
+            <div class="col-md-6">
+              <md-datepicker ng-model="model.tb_licenciamento_status.dta" class="col-md-12" md-placeholder="DD/MM/YYYY"></md-datepicker>
+            </div>
+          </div>
+        </md-content>
+      </div>
+
+      <div layout="column" ng-cloak class="col-md-6">
+        <md-toolbar class="md-primary">
+          <div class="md-toolbar-tools">
+            <h2 class="md-flex">PROCESSO Nº</h2>
+          </div>
+        </md-toolbar>
+        <md-content flex layout-padding>
+          <div class="row">
+            <div class="formField col-md-12">
+              <input id="ibram_processo" name="ibram_processo" ng-model="model.ibram_processo" autocomplete="off" ui-mask-placeholder  model-view-value="true" ui-mask='999999999999/999999999' required/>
+            </div>
+          </div>
+        </md-content>
+      </div>
+    </div>
+
+    <div layout="column" ng-cloak>
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Dados do Requerente</h2>
+        </div>
+      </md-toolbar>
+      <md-content flex layout-padding>
+        <div class="row">
+          <div class="formField col-md-12">
+            <label for="tb_requerente.name">Nome: <required/></label>
+            <input id="atividade_area" id="tb_requerente.name" name="tb_requerente.name" ng-model="model.tb_requerente.name" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.name.$error.required">Nome está vazio</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="formField col-md-6">
+            <label for="tb_requerente.cpf_cnpj">CPF/CNPJ: <required/></label>
+            <input id="atividade_area" id="tb_requerente.cpf_cnpj" name="tb_requerente.cpf_cnpj" ng-model="model.tb_requerente.cpf_cnpj" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.cpf_cnpj.$error.required">CPF/CNPJ está vazio</span>
+          </div>
+          <div class="formField col-md-6">
+            <label for="tb_requerente.cf_df">CF/DF: <required/></label>
+            <input id="atividade_area" id="tb_requerente.cf_df" name="tb_requerente.cf_df" ng-model="model.tb_requerente.cf_df" autocomplete="off"  ui-mask-placeholder  model-view-value="true" ui-mask='AA' required/>
+            <span class="error" ng-show="crudForm.tb_requerente.cf_df.$error.required">CF/DF está vazio</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="formField col-md-12">
+            <label for="tb_requerente.tb_locadouro.endereco">Endereço: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_locadouro.endereco" name="tb_requerente.tb_locadouro.endereco" ng-model="model.tb_requerente.tb_locadouro.endereco" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_locadouro.endereco.$error.required">Endereço está vazio</span>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="formField col-md-4">
+            <label for="tb_requerente.tb_locadouro.bairro">Bairro: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_locadouro.bairro" name="tb_requerente.tb_locadouro.bairro" ng-model="model.tb_requerente.tb_locadouro.bairro" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_locadouro.bairro.$error.required">Bairro está vazio</span>
+          </div>
+          <div class="formField col-md-4">
+            <label for="tb_requerente.tb_locadouro.cidade">Cidade/RA: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_locadouro.cidade" name="tb_requerente.tb_locadouro.cidade" ng-model="model.tb_requerente.tb_locadouro.cidade" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_locadouro.cidade.$error.required">Cidade está vazio</span>
+          </div>
+          <div class="formField col-md-4">
+            <label for="tb_requerente.telefone">Telefone: <required/></label>
+            <input id="atividade_area" id="tb_requerente.telefone" name="tb_requerente.telefone" ng-model="model.tb_requerente.telefone" autocomplete="off" ui-mask-placeholder model-view-value="true" ui-mask='(99) 999-999-99?9' required/>
+            <span class="error" ng-show="crudForm.tb_requerente.telefone.$error.required">Telefone está vazio</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="formField col-md-12">
+            <label for="tb_requerente.responsavel">Responsável: <required/></label>
+            <input id="atividade_area" id="tb_requerente.responsavel" name="tb_requerente.responsavel" ng-model="model.tb_requerente.responsavel" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.responsavel.$error.required">Responsável está vazio</span>
+          </div>
+        </div>
+          
+        <div class="row">
+          <div class="formField col-md-7">
+            <label for="tb_requerente.email">E-mail: <required/></label>
+            <input id="atividade_area" id="tb_requerente.email" name="tb_requerente.email" ng-model="model.tb_requerente.email" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.email.$error.required">E-mail está vazio</span>
+          </div>
+          <div class="formField col-md-2">
+            <label for="tb_requerente.rg">RG: <required/></label>
+            <input id="atividade_area" id="tb_requerente.rg" name="tb_requerente.rg" ng-model="model.tb_requerente.rg" autocomplete="off" ui-mask-placeholder model-view-value="true" ui-mask='9999999' required/>
+            <span class="error" ng-show="crudForm.tb_requerente.rg.$error.required">RG está vazio</span>
+          </div>
+          <div class="formField col-md-3">
+            <label for="tb_requerente.cpf">CPF: <required/></label>
+            <input id="atividade_area" id="tb_requerente.cpf" name="tb_requerente.cpf" ng-model="model.tb_requerente.cpf" autocomplete="off" ui-mask-placeholder model-view-value="true" ui-mask='999.999.999-99' required/>
+            <span class="error" ng-show="crudForm.tb_requerente.cpf.$error.required">CPF está vazio</span>
+          </div>
+        </div>
+      </md-content>
+    </div>
+
+    <div layout="column" ng-cloak>
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Endereço para correspondência</h2>
+        </div>
+      </md-toolbar>
+      <md-content flex layout-padding>
+        <div class="row">
+          <div class="formField col-md-12">
+            <label for="tb_requerente.tb_correspondencia.name">Nome do destinatário: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_correspondencia.name" name="tb_requerente.tb_correspondencia.name" ng-model="model.tb_requerente.tb_correspondencia.name" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_correspondencia.name.$error.required">Nome do destinatário está vazio</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="formField col-md-12">
+            <label for="tb_requerente.tb_correspondencia.tb_locadouro.endereco">Endereço: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_correspondencia.tb_locadouro.endereco" name="tb_requerente.tb_correspondencia.tb_locadouro.endereco" ng-model="model.tb_requerente.tb_correspondencia.tb_locadouro.endereco" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_correspondencia.tb_locadouro.endereco.$error.required">Endereço está vazio</span>
+          </div>
+        </div>
+      
+        <div class="row">
+          <div class="formField col-md-4">
+            <label for="tb_requerente.tb_correspondencia.tb_locadouro.cidade">Cidade/RA: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_correspondencia.tb_locadouro.cidade" name="tb_requerente.tb_correspondencia.tb_locadouro.cidade" ng-model="model.tb_requerente.tb_correspondencia.tb_locadouro.cidade" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_correspondencia.tb_locadouro.cidade.$error.required">Cidade está vazio</span>
+          </div>
+          <div class="formField col-md-4">
+            <label for="tb_requerente.tb_correspondencia.tb_locadouro.cep">CEP: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_correspondencia.tb_locadouro.cep" name="tb_requerente.tb_correspondencia.tb_locadouro.cep" ng-model="model.tb_requerente.tb_correspondencia.tb_locadouro.cep" autocomplete="off" ui-mask-placeholder model-view-value="true" ui-mask='99999-999' required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_correspondencia.tb_locadouro.cep.$error.required">CEP está vazio</span>
+          </div>
+          <div class="formField col-md-4">
+            <label for="tb_requerente.tb_correspondencia.telefone">Telefone: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_correspondencia.telefone" name="tb_requerente.tb_correspondencia.telefone" ng-model="model.tb_requerente.tb_correspondencia.telefone" autocomplete="off" ui-mask-placeholder model-view-value="true" ui-mask='(99) 999-999-99?9' required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_correspondencia.telefone.$error.required">Telefone está vazio</span>
+          </div>
+        </div>
+      </md-content>
+    </div>
+
+    <div layout="column" ng-cloak>
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Dados do Empreendimento</h2>
+        </div>
+      </md-toolbar>
+      <md-content flex layout-padding>
+        <md-subheader class="md-primary">Indicação de referências (se área rural, apresentar mapa com os acessos)</md-subheader>
+        <div class="row">
+          <div class="formField col-md-12">
+            <label for="tb_requerente.tb_empreendimento.localizacao">Localização: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_empreendimento.localizacao" localizacao="tb_requerente.tb_empreendimento.localizacao" ng-model="model.tb_requerente.tb_empreendimento.localizacao" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_empreendimento.localizacao.$error.required">Localização está vazio</span>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="formField col-md-4">
+            <label for="tb_requerente.tb_empreendimento.tb_locadouro.bairro">Bairro: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_empreendimento.tb_locadouro.bairro" name="tb_requerente.tb_empreendimento.tb_locadouro.bairro" ng-model="model.tb_requerente.tb_empreendimento.tb_locadouro.bairro" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_empreendimento.tb_locadouro.bairro.$error.required">Bairro está vazio</span>
+          </div>
+          <div class="formField col-md-4">
+            <label for="tb_requerente.tb_empreendimento.tb_locadouro.cidade">Cidade/RA: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_empreendimento.tb_locadouro.cidade" name="tb_requerente.tb_empreendimento.tb_locadouro.cidade" ng-model="model.tb_requerente.tb_empreendimento.tb_locadouro.cidade" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_empreendimento.tb_locadouro.cidade.$error.required">Cidade/RA está vazio</span>
+          </div>
+          <div class="formField col-md-4">
+            <label for="tb_requerente.tb_empreendimento.tb_locadouro.cep">CEP: <required/></label>
+            <input id="atividade_area" id="tb_requerente.tb_empreendimento.tb_locadouro.cep" name="tb_requerente.tb_empreendimento.tb_locadouro.cep" ng-model="model.tb_requerente.tb_empreendimento.tb_locadouro.cep" autocomplete="off" ui-mask-placeholder model-view-value="true" ui-mask='99999-999' required/>
+            <span class="error" ng-show="crudForm.tb_requerente.tb_empreendimento.tb_locadouro.cep.$error.required">CEP está vazio</span>
+          </div>
+        </div>
+      </md-content>
+    </div>
+
+    <div layout="column" ng-cloak>
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Tipo de atividade / Empreendimento</h2>
+        </div>
+      </md-toolbar>
+      <md-content flex layout-padding>
+        <div class="row">
+          <div class="formField col-md-12">
+            <label for="tb_requerente.td_tipo_atividade">Tipo da atividade: <required/></label>
+            <md-radio-group required layout="row" ng-model="model.tipo_atividade">
+              <md-radio-button ng-repeat="value in tipo_atividade" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+            </md-radio-group>
+            <span class="error" ng-show="crudForm.tb_requerente.td_tipo_atividade.$error.required">Tipo da atividade está vazio</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="formField col-md-2">
+            <label for="tb_requerente.atividade_area">Área: <required/></label>
+            <input type="number" id="atividade_area" id="tb_requerente.atividade_area" name="tb_requerente.atividade_area" ng-model="model.tb_requerente.atividade_area" autocomplete="off" required/>
+            <span class="error" ng-show="crudForm.tb_requerente.atividade_area.$error.required">Bairro está vazio</span>
+          </div>
+          <div class="formField col-md-10">
+            <label for="tb_requerente.atividade_descricao">Descrição resumida das atividades: <required/></label>
+            <textarea id="atividade_area" id="tb_requerente.atividade_descricao" name="tb_requerente.atividade_descricao" ng-model="model.tb_requerente.atividade_descricao" autocomplete="off" rows="5"/></textarea>
+            <span class="error" ng-show="crudForm.tb_requerente.atividade_descricao.$error.required">Descrição resumida das atividades está vazio</span>
+          </div>
+        </div>
+      </md-content>
+    </div>
+
+    <div layout="column" ng-cloak>
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Caracteristicas Basicas</h2>
+        </div>
+      </md-toolbar>
+      <md-content flex layout-padding>
+        <div class="row">
+          <div class="formField col-md-3">
+            <label for="fase_empreendimento">Fase Empreendimento: <required/></label>
+            <md-radio-group required ng-model="model.fase_empreendimento">
+              <md-radio-button ng-repeat="value in fase_empreendimento" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+            </md-radio-group>
+            <span class="error" ng-show="crudForm.fase_empreendimento.$error.required">Tipo da Atividade está vazio</span>
+          </div>
+          <div class="formField col-md-3">
+            <label for="situacao_imovel">Situacao imóvel: <required/></label>
+            <md-radio-group required ng-model="model.situacao_imovel">
+              <md-radio-button ng-repeat="value in situacao_imovel" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+            </md-radio-group>
+            <span class="error" ng-show="crudForm.situacao_imovel.$error.required">Tipo da Atividade está vazio</span>
+          </div>
+          <div class="formField col-md-3">
+            <label for="abastecimento_agua">Abastecimento Água: <required/></label>
+            <md-radio-group required ng-model="model.abastecimento_agua">
+              <md-radio-button ng-repeat="value in abastecimento_agua" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+            </md-radio-group>
+            <span class="error" ng-show="crudForm.abastecimento_agua.$error.required">Tipo da Atividade está vazio</span>
+          </div>
+          <div class="formField col-md-3">
+            <label for="efluente_liquido">Efluente liquido: <required/></label>
+            <md-radio-group required ng-model="model.efluente_liquido">
+              <md-radio-button ng-repeat="value in efluente_liquido" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+            </md-radio-group>
+            <span class="error" ng-show="crudForm.efluente_liquido.$error.required">Tipo da Atividade está vazio</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="formField col-md-3">
+            <label for="destino_lixo">Destino Lixo: <required/></label>
+            <md-radio-group required ng-model="model.destino_lixo">
+              <md-radio-button ng-repeat="value in destino_lixo" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+            </md-radio-group>
+            <span class="error" ng-show="crudForm.destino_lixo.$error.required">Tipo da Atividade está vazio</span>
+          </div>
+          <div class="formField col-md-3">
+            <label for="destino_efluente">Destino efluente: <required/></label>
+            <md-radio-group required ng-model="model.destino_efluente">
+              <md-radio-button ng-repeat="value in destino_efluente" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+            </md-radio-group>
+            <span class="error" ng-show="crudForm.situacao_imovel.$error.required">Tipo da Atividade está vazio</span>
+          </div>
+          <div class="formField col-md-3">
+            <label for="tipo_lixo_gerado">Tipo lixo gerado: <required/></label>
+            <md-radio-group required ng-model="model.tipo_lixo_gerado">
+              <md-radio-button ng-repeat="value in tipo_lixo_gerado" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+            </md-radio-group>
+            <span class="error" ng-show="crudForm.tipo_lixo_gerado.$error.required">Tipo da Atividade está vazio</span>
+          </div>
+        </div>
+      </md-content>
+    </div>
+
+    <div class="row formButtons">
+      <button class="btn btnDanger">Limpar</button>
+      <button class="btn btnDefault" ng-disabled="crudForm.$invalid">Salvar</button>
+    </div>
+
+  </form>
+</div>

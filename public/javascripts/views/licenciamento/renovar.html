@@ -1,0 +1,24 @@
+<md-dialog aria-label="Alterar Status" ng-cloak style="width:300px;">
+  <form name="crudForm" novalidate>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Renovação</h2>
+      </div>
+    </md-toolbar>
+      
+    <br/>
+    <md-dialog-content>
+      <div class="row">
+        <label for="renovacao_processo">PROCESSO Nº</label>
+      </div>
+      <div class="row">
+        <input class="col-md-9" id="renovacao_processo" name="renovacao_processo" ng-model="renovacao_processo" autocomplete="off" ui-mask-placeholder  model-view-value="true" ui-mask='999999999999/999999999' required/>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="answer(true)">Salvar</md-button>
+      <md-button ng-click="answer(false)">Cancelar</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

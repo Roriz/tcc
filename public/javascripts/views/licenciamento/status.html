@@ -1,0 +1,43 @@
+<md-dialog aria-label="Alterar Status" ng-cloak style="width:50%;">
+  <form name="crudForm" novalidate>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Alterar Status</h2>
+      </div>
+    </md-toolbar>
+      
+    <br/>
+    <md-dialog-content>
+      <md-list flex>
+        <md-subheader class="md-no-sticky">Histórico</md-subheader>
+        <md-list-item ng-repeat="value in model.tb_licenciamento_status" class="md-3-line" ng-click="null">
+          <img class="md-avatar" />
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ value.td_tipos_licenciamento }}</h3>
+            <p>{{ value.dta }}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+
+      <div class="row">
+        <label for="prorrogacao_processo">Solicitação</label>
+      </div>
+      <div class="row">
+        <md-radio-group required ng-model="td_tipos_licenciamento">
+          <md-radio-button ng-repeat="value in tipos_licenciamento" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+        </md-radio-group>
+      </div>
+      <div class="row">
+        <label for="prorrogacao_processo">Data</label>
+      </div>
+      <div class="row">
+        <md-datepicker ng-model="dta" md-placeholder="DD/MM/YYYY"></md-datepicker>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="answer(true)">Salvar</md-button>
+      <md-button ng-click="answer(false)">Cancelar</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

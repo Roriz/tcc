@@ -1,0 +1,18 @@
+<div class="row rowMiniCard">
+	<div class="pull-right">
+		<input type="search" ng-model="gridOptions.quickFilterText" placeholder="Buscar" ng-show="datasource.hasSearch"/>
+		<a ng-repeat="button in datasource.buttons" href="{{button.href}}" ng-class="button.class">{{button.name}}</a>
+	</div>
+</div>
+
+
+<div class="table clearfix" ag-grid="gridOptions"></div> 
+<div class="grid-paginate">
+	<ul>
+		<li data-previus ng-click="paginate.previusPage()"><i ng-class="paginate.currentPage == 0 ? 'icon iconArrowLeft' : 'icon iconArrowLeft-default'"></i></li>
+		<li ng-repeat="page in paginate.pages" ng-class="page.number -1 == paginate.currentPage ? 'selected' : ''" ng-click="paginate.goTo(page.number-1)">
+			{{page.number}}
+		</li>
+		<li data-next ng-click="paginate.nextPage()"><i  ng-class="paginate.canNexted ? 'icon iconArrowRight-default' : 'icon iconArrowRight'"></i></li>
+	</ul>
+</div>

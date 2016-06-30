@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html ng-app="licagro">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>LICAGRO</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    
+    <!-- LOAD CSS -->
+    <% for(var i=0; i < cssFiles.length; i++) { %>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/<%= cssFiles[i] %>" />
+    <% } %>
+
+    <script type="text/javascript" src="/javascripts/js/jquery-2.1.4.min.js"></script>
+    <!-- <script type="text/javascript" src="/javascripts/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="/javascripts/js/angular.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/angular-route.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/angular-animate.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/angular-material.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/angular-messages.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/angular-aria.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/jquery.datetimepicker.js"></script>
+    <script type="text/javascript" src="/javascripts/js/alertify.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/lodash.js"></script>
+    <script type="text/javascript" src="/javascripts/js/ag-grid.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/mask.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/moment-with-locales.js"></script>
+    <script type="text/javascript" src="/javascripts/js/moment-timezone-with-data.js"></script>
+    <script type="text/javascript" src="/javascripts/js/ng-file-upload-shim.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/ng-file-upload-all.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/ol.js"></script>
+    <script type="text/javascript" src="/javascripts/js/ui-bootstrap-tpls-1.1.0.min.js"></script>
+    <script type="text/javascript" src="/javascripts/js/angular-openlayers-directive.js"></script>
+    <script type="text/javascript" src="/javascripts/js/ng-img-crop.js"></script>
+
+
+    <script type="text/javascript" src="/javascripts/app.js"></script>
+    <script type="text/javascript" src="/javascripts/routes.js"></script>
+
+
+    <!-- LOAD factoryFiles -->
+    <% for(var i=0; i < factoryFiles.length; i++) { %>
+        <script type="text/javascript" src="/javascripts/factories/<%= factoryFiles[i] %>"></script>
+    <% } %>
+    <!-- LOAD Controllers -->
+    <% for(var i=0; i < controllerFiles.length; i++) { %>
+        <script type="text/javascript" src="/javascripts/controllers/<%= controllerFiles[i] %>"></script>
+    <% } %>
+
+    <!-- LOAD directiveFiles -->
+    <% for(var i=0; i < directiveFiles.length; i++) { %>
+        <script type="text/javascript" src="/javascripts/directives/<%= directiveFiles[i] %>"></script>
+    <% } %>
+
+
+    <script type="text/javascript" src="/javascripts/js/custom.js"></script>
+
+    <script type="text/javascript">
+    var TIME_ZONE = 'America/Sao_Paulo';
+    var TIME_ZONE_UTC = 'Etc/UTC';
+    var CURRENTUSER =  <%- JSON.stringify(user) %>;
+    var ISMOBILE = $(window).width() < 768 ? true : false;
+
+    var seed ={
+        situacao_imovel: [
+         {id:1, name: 'Particular'},
+         {id:2, name: 'Arrendado'},
+         {id:3, name: 'Posse'},
+         {id:4, name: 'Alugado'}
+        ],
+        destino_efluente: [
+         {id:1, name: 'CAESB'},
+         {id:2, name: 'Fossa séptica'},
+         {id:3, name: 'Córrego/lago'},
+         {id:4, name: 'Rede de água pluvial'}
+        ],
+        fase_empreendimento: [
+         {id:1, name: 'Projeto'},
+         {id:2, name: 'Em implantação'},
+         {id:3, name: 'implantado/instalado'},
+         {id:4, name: 'ampliação/reforma'}
+        ],
+        destino_lixo: [
+         {id:1, name: 'SLU'},
+         {id:2, name: 'Contêner (lixeira)'},
+         {id:3, name: 'Outro'}
+        ],
+        efluente_liquido: [
+         {id:1, name: 'Doméstico'},
+         {id:2, name: 'Óleo'},
+         {id:3, name: 'Químico'},
+         {id:4, name: 'Hospitalar'}
+        ],
+        abastecimento_agua: [
+         {id:1, name: 'Rede (CAESB)'},
+         {id:2, name: 'Poço/cisterna'},
+         {id:3, name: 'Córrego/rio/lago'},
+         {id:4, name: 'Nascente/mina'}
+        ],
+        tipo_lixo_gerado: [
+         {id:1, name: 'Doméstico'},
+         {id:2, name: 'Comercial'},
+         {id:3, name: 'Industrial'},
+         {id:4, name: 'Hospitalar'}
+        ],
+        tipo_atividade: [
+         {id:1, name: 'Comércio'},
+         {id:2, name: 'Indústria'},
+         {id:3, name: 'Educação'},
+         {id:4, name: 'Prestação de Serviços'},
+         {id:5, name: 'Lazer'},
+         {id:6, name: 'Pecuária'},
+         {id:7, name: 'Construção'}
+        ],
+        tipos_licenciamento: [
+            // {id:1, name: 'Autorização Ambiental - AA'},
+            {id:1, name: 'Licença Prévia - LP'},
+            {id:2, name: 'Licença de Instalação - LI'},
+            {id:3, name: 'Licençca de Operação - LO'},
+            // {id:4, name: 'Licença Ambiental Simplificada - LAS'}
+        ],
+        licagro_licenciamento: [
+            {
+                id: 0,
+                "tb_licenciamento_status": [{
+                    'dta': '2016-05-02',
+                    'td_tipos_licenciamento': 'Licença Prévia - LP'
+                }],
+                "ibram_processo": '999999999999/999999999',
+                "tb_requerente" : {
+                    "name" : 'João da Silva',
+                    "cpf_cnpj" : '023.967.571-13',
+                    "cf_df" : 'DF',
+                    "tb_locadouro": {
+                        "endereco": 'SHIS QI 29 Conjunto 6',
+                        "bairro": 'Lago Sul',
+                        "cidade": 'Brasília'
+                    },
+                    "telefone" : '(61) 982-023-359',
+                    "responsavel" : 'Radamés Roriz',
+                    "email" : 'radamesroriz@gmail.com',
+                    "rg" : '2662691',
+                    "cpf" : '023.967.571-13',
+                    "tb_correspondencia": {
+                        "name": 'João da Silva',
+                        "telefone": '(61) 982-023-359',
+                        "tb_locadouro": {
+                            "endereco": 'SHIS QI 29 Conjunto 7',
+                            "cidade": 'Brasília',
+                            "cep": '71675-260'
+                        }
+                    },
+                    "tb_empreendimento": {
+                        "localizacao": 'Perto do Supermecado',
+                        "tb_locadouro": {
+                            "bairro": 'Lago Sul',
+                            "cidade": 'Brasília',
+                            "cep": '71675-260',
+                        },
+                    },
+                    "atividade_area" : '40',
+                    "atividade_descricao" : ''
+                },
+                "tipo_atividade": 'Indústria',
+                "fase_empreendimento": 'Em implantação',
+                "situacao_imovel": 'Posse',
+                "abastecimento_agua": 'Poço/cisterna',
+                "efluente_liquido": 'Óleo',
+                "destino_lixo": 'SLU',
+                "destino_efluente": 'CAESB',
+                "tipo_lixo_gerado": 'Comercial'
+            },{
+                id: 1,
+                "tb_licenciamento_status": [{
+                    'dta': '2016-05-02',
+                    'td_tipos_licenciamento': 'Licença de Instalação - LI'
+                },{
+                    'dta': '2016-04-02',
+                    'td_tipos_licenciamento': 'Licença Prévia - LP'
+                }],
+                "ibram_processo": '222222222222/222222222',
+                "tb_requerente" : {
+                    "name" : 'João da Silva',
+                    "cpf_cnpj" : '023.967.571-13',
+                    "cf_df" : 'DF',
+                    "tb_locadouro": {
+                        "endereco": 'SHIS QI 29 Conjunto 6',
+                        "bairro": 'Lago Sul',
+                        "cidade": 'Brasília'
+                    },
+                    "telefone" : '(61) 982-023-359',
+                    "responsavel" : 'Radamés Roriz',
+                    "email" : 'radamesroriz@gmail.com',
+                    "rg" : '2662691',
+                    "cpf" : '023.967.571-13',
+                    "tb_correspondencia": {
+                        "name": 'João da Silva',
+                        "telefone": '(61) 982-023-359',
+                        "tb_locadouro": {
+                            "endereco": 'SHIS QI 29 Conjunto 7',
+                            "cidade": 'Brasília',
+                            "cep": '71675-260'
+                        }
+                    },
+                    "tb_empreendimento": {
+                        "localizacao": 'Perto do Supermecado',
+                        "tb_locadouro": {
+                            "bairro": 'Lago Sul',
+                            "cidade": 'Brasília',
+                            "cep": '71675-260',
+                        },
+                    },
+                    "atividade_area" : '40',
+                    "atividade_descricao" : ''
+                },
+                "tipo_atividade": 'Indústria',
+                "fase_empreendimento": 'Em implantação',
+                "situacao_imovel": 'Posse',
+                "abastecimento_agua": 'Poço/cisterna',
+                "efluente_liquido": 'Óleo',
+                "destino_lixo": 'SLU',
+                "destino_efluente": 'CAESB',
+                "tipo_lixo_gerado": 'Comercial'
+            },{
+                id: 2,
+                "tb_licenciamento_status": [{
+                    'dta': '2016-05-02',
+                    'td_tipos_licenciamento': 'Licençca de Operação - LO'
+                }],
+                "ibram_processo": '111111111111/111111111',
+                "tb_requerente" : {
+                    "name" : 'João da Silva',
+                    "cpf_cnpj" : '023.967.571-13',
+                    "cf_df" : 'DF',
+                    "tb_locadouro": {
+                        "endereco": 'SHIS QI 29 Conjunto 6',
+                        "bairro": 'Lago Sul',
+                        "cidade": 'Brasília'
+                    },
+                    "telefone" : '(61) 982-023-359',
+                    "responsavel" : 'Radamés Roriz',
+                    "email" : 'radamesroriz@gmail.com',
+                    "rg" : '2662691',
+                    "cpf" : '023.967.571-13',
+                    "tb_correspondencia": {
+                        "name": 'João da Silva',
+                        "telefone": '(61) 982-023-359',
+                        "tb_locadouro": {
+                            "endereco": 'SHIS QI 29 Conjunto 7',
+                            "cidade": 'Brasília',
+                            "cep": '71675-260'
+                        }
+                    },
+                    "tb_empreendimento": {
+                        "localizacao": 'Perto do Supermecado',
+                        "tb_locadouro": {
+                            "bairro": 'Lago Sul',
+                            "cidade": 'Brasília',
+                            "cep": '71675-260',
+                        },
+                    },
+                    "atividade_area" : '40',
+                    "atividade_descricao" : ''
+                },
+                "tipo_atividade": 'Indústria',
+                "fase_empreendimento": 'Em implantação',
+                "situacao_imovel": 'Posse',
+                "abastecimento_agua": 'Poço/cisterna',
+                "efluente_liquido": 'Óleo',
+                "destino_lixo": 'SLU',
+                "destino_efluente": 'CAESB',
+                "tipo_lixo_gerado": 'Comercial'
+            },
+        ],
+    }
+    
+    localStorage.clear();
+    _.each(seed, function(model, key){
+        localStorage.setItem(key, JSON.stringify(model));
+    });
+    </script>
+</head>
+
+<body ng-controller="BodyController as body">
+    <menu ng-show="layout.hanburger"></menu>
+    <layout>
+        <div data-layout-header class="layout-header"></div>
+        <div data-layout-body class="layout-body"></div>
+        <div data-layout-footer class="layout-footer"></div>
+    </layout>
