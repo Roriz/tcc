@@ -8,7 +8,7 @@
       
     <br/>
     <md-dialog-content>
-      <md-list flex>
+      <!-- <md-list flex>
         <md-subheader class="md-no-sticky">Histórico</md-subheader>
         <md-list-item ng-repeat="value in model.tb_licenciamento_status" class="md-3-line" ng-click="null">
           <img class="md-avatar" />
@@ -17,14 +17,14 @@
             <p>{{ value.dta }}</p>
           </div>
         </md-list-item>
-      </md-list>
+      </md-list> -->
 
       <div class="row">
         <label for="prorrogacao_processo">Solicitação</label>
       </div>
       <div class="row">
         <md-radio-group required ng-model="td_tipos_licenciamento">
-          <md-radio-button ng-repeat="value in tipos_licenciamento" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+          <md-radio-button ng-repeat="value in tipos_licenciamento" value="{{value.name}}" ng-disabled="true" class="md-primary">{{value.name}}</md-radio-button>
         </md-radio-group>
       </div>
       <div class="row">

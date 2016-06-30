@@ -219,20 +219,42 @@ app.controller('LicenciamentoShowCtrl', ['$scope', '$routeParams', 'Licenciament
 
 
 app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope',
-  function(Licenciamento, $location, $scope, $routeParams, $rootScope) {
+  'SituacaoImovel', 'DestinoEfluente', 'FaseEmpreendimento', 'DestinoLixo', 'EfluenteLiquido', 'AbastecimentoAgua', 'TipoLixoGerado', 'TipoAtividade', 'TiposLicenciamento',
+  function(Licenciamento, $location, $scope, $routeParams, $rootScope,
+    SituacaoImovel, DestinoEfluente, FaseEmpreendimento, DestinoLixo, EfluenteLiquido, AbastecimentoAgua, TipoLixoGerado, TipoAtividade, TiposLicenciamento) {
     $scope.model = Licenciamento;
-    $scope.situacao_imovel = JSON.parse(localStorage.getItem('situacao_imovel'));
-    $scope.destino_efluente = JSON.parse(localStorage.getItem('destino_efluente'));
-    $scope.fase_empreendimento = JSON.parse(localStorage.getItem('fase_empreendimento'));
-    $scope.destino_lixo = JSON.parse(localStorage.getItem('destino_lixo'));
-    $scope.efluente_liquido = JSON.parse(localStorage.getItem('efluente_liquido'));
-    $scope.abastecimento_agua = JSON.parse(localStorage.getItem('abastecimento_agua'));
-    $scope.tipo_lixo_gerado = JSON.parse(localStorage.getItem('tipo_lixo_gerado'));
-    $scope.tipo_atividade = JSON.parse(localStorage.getItem('tipo_atividade'));
-    $scope.tipos_licenciamento = JSON.parse(localStorage.getItem('tipos_licenciamento'));
+    SituacaoImovel.query({}, function(r) {
+      $scope.situacao_imovel = r;
+    });
+    DestinoEfluente.query({}, function(r) {
+      $scope.destino_efluente = r;
+    });
+    FaseEmpreendimento.query({}, function(r) {
+      $scope.fase_empreendimento = r;
+    });
+    DestinoLixo.query({}, function(r) {
+      $scope.destino_lixo = r;
+    });
+    EfluenteLiquido.query({}, function(r) {
+      $scope.efluente_liquido = r;
+    });
+    AbastecimentoAgua.query({}, function(r) {
+      $scope.abastecimento_agua = r;
+    });
+    TipoLixoGerado.query({}, function(r) {
+      $scope.tipo_lixo_gerado = r;
+    });
+    TipoAtividade.query({}, function(r) {
+      $scope.tipo_atividade = r;
+    });
+    TiposLicenciamento.query({}, function(r) {
+      $scope.tipos_licenciamento = r;
+    });
 
-    $scope.model.tb_licenciamento_status = {};
-    $scope.model.tb_licenciamento_status.td_tipos_licenciamento = 'Licença Prévia - LP';
+    $scope.model.tb_licenciamento_status = [];
+    $scope.model.tb_licenciamento_status[0] = {};
+    $scope.model.tb_licenciamento_status[0].td_tipos_licenciamento = 'Licença Prévia - LP';
+    $scope.model.tb_licenciamento_status[0].dta = new Date();
 
     if ($routeParams.id) {
       Licenciamento.get($routeParams.id, function(r) {
@@ -250,6 +272,7 @@ app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope',
 
       if (model.id) {
         var tb_licenciamento_status = model.tb_licenciamento_status;
+        tb_licenciamento_status.dta = DateToDB(tb_licenciamento_status.dta);
         model.tb_licenciamento_status = [];
         model.tb_licenciamento_status.push(tb_licenciamento_status);
 
@@ -281,21 +304,59 @@ app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope',
 ]);
 
 
-app.controller('LicenciamentoLiLoEditCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope',
-  function(Licenciamento, $location, $scope, $routeParams, $rootScope) {
+app.controller('LicenciamentoLiLoEditCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope', '$mdDialog', 'TiposLicenciamento', 'DateToDB',
+  function(Licenciamento, $location, $scope, $routeParams, $rootScope, $mdDialog, TiposLicenciamento, DateToDB) {
     $scope.model = Licenciamento;
-
+    $FatherScope = $scope;
 
     $scope.search = function() {
       Licenciamento.query({
         ibram_processo: $scope.model.ibram_processo
       }, function(d) {
-        $scope.model = d;
+        d = _.first(d);
+        $scope.model = _.extend(d, $scope.model);
         $scope.model.showDetails = true;
       })
     }
-    $scope.include = function() {
-      console.log('include');
+
+
+    $scope.include = function(id) {
+      $mdDialog.show({
+        controller: function($scope, $mdDialog) {
+          $scope.model = Licenciamento;
+          TiposLicenciamento.query({}, function(r) {
+            $scope.tipos_licenciamento = r;
+          });
+          $scope.dta = false;
+          TiposLicenciamento.get($routeParams.type, function(r) {
+            $scope.td_tipos_licenciamento = r.name;
+          });
+
+
+          $scope.answer = function(answer) {
+            if (answer) {
+              Licenciamento.get(id, function(model) {
+                model.tb_licenciamento_status.push({
+                  td_tipos_licenciamento: $scope.td_tipos_licenciamento,
+                  dta: DateToDB($scope.dta)
+                });
+                Licenciamento.update(model, function(r) {
+                  r.showDetails = true;
+                  $FatherScope.model = r;
+                  $mdDialog.hide(answer);
+                  alertify.success('Licenciamento atualizado com sucesso!')
+                });
+              });
+            } else {
+              $mdDialog.hide(answer);
+            }
+          };
+        },
+        templateUrl: '/javascripts/views/licenciamento/status.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true,
+        fullscreen: true
+      });
     }
   }
 ]);

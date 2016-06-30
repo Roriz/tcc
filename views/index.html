@@ -46,6 +46,10 @@
     <script type="text/javascript" src="/javascripts/routes.js"></script>
 
 
+    <!-- LOAD Services -->
+    <% for(var i=0; i < servicesFiles.length; i++) { %>
+        <script type="text/javascript" src="/javascripts/services/<%= servicesFiles[i] %>"></script>
+    <% } %>
     <!-- LOAD factoryFiles -->
     <% for(var i=0; i < factoryFiles.length; i++) { %>
         <script type="text/javascript" src="/javascripts/factories/<%= factoryFiles[i] %>"></script>
@@ -127,7 +131,7 @@
             {id:3, name: 'Licençca de Operação - LO'},
             // {id:4, name: 'Licença Ambiental Simplificada - LAS'}
         ],
-        licagro_licenciamento: [
+        licenciamento: [
             {
                 id: 0,
                 "tb_licenciamento_status": [{
@@ -281,10 +285,10 @@
             },
         ],
     }
-    
+    var prefix = 'licagro_';
     localStorage.clear();
     _.each(seed, function(model, key){
-        localStorage.setItem(key, JSON.stringify(model));
+        localStorage.setItem(prefix + key, JSON.stringify(model));
     });
     </script>
 </head>

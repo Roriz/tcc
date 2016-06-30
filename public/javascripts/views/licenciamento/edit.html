@@ -11,12 +11,12 @@
         <md-content flex layout-padding>
           <div class="row">
             <div class="formField col-md-6">
-              <md-radio-group required ng-model="model.tb_licenciamento_status.td_tipos_licenciamento">
+              <md-radio-group required ng-model="model.tb_licenciamento_status[0].td_tipos_licenciamento">
                 <md-radio-button ng-repeat="value in tipos_licenciamento" disabled value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
               </md-radio-group>
             </div>
             <div class="col-md-6">
-              <md-datepicker ng-model="model.tb_licenciamento_status.dta" class="col-md-12" md-placeholder="DD/MM/YYYY"></md-datepicker>
+              <md-datepicker ng-model="model.tb_licenciamento_status[0].dta" class="col-md-12" required md-placeholder="DD/MM/YYYY"></md-datepicker>
             </div>
           </div>
         </md-content>

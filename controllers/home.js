@@ -13,6 +13,7 @@ var Home = module.exports = function() {
       user: req.user,
       cssFiles: fs.readdirSync(path.resolve(__dirname, '..', 'public', 'stylesheets')),
       controllerFiles: fs.readdirSync(path.resolve(__dirname, '..', 'public', 'javascripts', 'controllers')),
+      servicesFiles: fs.readdirSync(path.resolve(__dirname, '..', 'public', 'javascripts', 'services')),
       factoryFiles: fs.readdirSync(path.resolve(__dirname, '..', 'public', 'javascripts', 'factories')),
       directiveFiles: fs.readdirSync(path.resolve(__dirname, '..', 'public', 'javascripts', 'directives'))
     });
