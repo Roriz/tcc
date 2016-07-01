@@ -1,5 +1,8 @@
 var app = angular.module('licagro');
 
 app.factory('DestinoEfluente', function(DefaultORM) {
-  return _.extend(DefaultORM('destino_efluente'), {});
+  return function() {
+    var self = this;
+    self = _.extend(self, DefaultORM('destino_efluente'));
+  };
 });

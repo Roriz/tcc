@@ -75,219 +75,214 @@
 
     var seed ={
         situacao_imovel: [
-         {id:1, name: 'Particular'},
-         {id:2, name: 'Arrendado'},
-         {id:3, name: 'Posse'},
-         {id:4, name: 'Alugado'}
+         {name: 'Particular'},
+         {name: 'Arrendado'},
+         {name: 'Posse'},
+         {name: 'Alugado'}
         ],
         destino_efluente: [
-         {id:1, name: 'CAESB'},
-         {id:2, name: 'Fossa séptica'},
-         {id:3, name: 'Córrego/lago'},
-         {id:4, name: 'Rede de água pluvial'}
+         {name: 'CAESB'},
+         {name: 'Fossa séptica'},
+         {name: 'Córrego/lago'},
+         {name: 'Rede de água pluvial'}
         ],
         fase_empreendimento: [
-         {id:1, name: 'Projeto'},
-         {id:2, name: 'Em implantação'},
-         {id:3, name: 'implantado/instalado'},
-         {id:4, name: 'ampliação/reforma'}
+         {name: 'Projeto'},
+         {name: 'Em implantação'},
+         {name: 'implantado/instalado'},
+         {name: 'ampliação/reforma'}
         ],
         destino_lixo: [
-         {id:1, name: 'SLU'},
-         {id:2, name: 'Contêner (lixeira)'},
-         {id:3, name: 'Outro'}
+         {name: 'SLU'},
+         {name: 'Contêner (lixeira)'},
+         {name: 'Outro'}
         ],
         efluente_liquido: [
-         {id:1, name: 'Doméstico'},
-         {id:2, name: 'Óleo'},
-         {id:3, name: 'Químico'},
-         {id:4, name: 'Hospitalar'}
+         {name: 'Doméstico'},
+         {name: 'Óleo'},
+         {name: 'Químico'},
+         {name: 'Hospitalar'}
         ],
         abastecimento_agua: [
-         {id:1, name: 'Rede (CAESB)'},
-         {id:2, name: 'Poço/cisterna'},
-         {id:3, name: 'Córrego/rio/lago'},
-         {id:4, name: 'Nascente/mina'}
+         {name: 'Rede (CAESB)'},
+         {name: 'Poço/cisterna'},
+         {name: 'Córrego/rio/lago'},
+         {name: 'Nascente/mina'}
         ],
         tipo_lixo_gerado: [
-         {id:1, name: 'Doméstico'},
-         {id:2, name: 'Comercial'},
-         {id:3, name: 'Industrial'},
-         {id:4, name: 'Hospitalar'}
+         {name: 'Doméstico'},
+         {name: 'Comercial'},
+         {name: 'Industrial'},
+         {name: 'Hospitalar'}
         ],
         tipo_atividade: [
-         {id:1, name: 'Comércio'},
-         {id:2, name: 'Indústria'},
-         {id:3, name: 'Educação'},
-         {id:4, name: 'Prestação de Serviços'},
-         {id:5, name: 'Lazer'},
-         {id:6, name: 'Pecuária'},
-         {id:7, name: 'Construção'}
+         {name: 'Comércio'},
+         {name: 'Indústria'},
+         {name: 'Educação'},
+         {name: 'Prestação de Serviços'},
+         {name: 'Lazer'},
+         {name: 'Pecuária'},
+         {name: 'Construção'}
         ],
         tipos_licenciamento: [
-            // {id:1, name: 'Autorização Ambiental - AA'},
-            {id:1, name: 'Licença Prévia - LP'},
-            {id:2, name: 'Licença de Instalação - LI'},
-            {id:3, name: 'Licençca de Operação - LO'},
+            {id: 1, name: 'Licença Prévia - LP'},
+            {id: 2, name: 'Licença de Instalação - LI'},
+            {id: 3, name: 'Licençca de Operação - LO'},
+            // {name: 'Autorização Ambiental - AA'},
             // {id:4, name: 'Licença Ambiental Simplificada - LAS'}
         ],
-        licenciamento: [
-            {
-                id: 0,
-                "tb_licenciamento_status": [{
-                    'dta': '2016-05-02',
-                    'td_tipos_licenciamento': 'Licença Prévia - LP'
-                }],
-                "ibram_processo": '999999999999/999999999',
-                "tb_requerente" : {
-                    "name" : 'João da Silva',
-                    "cpf_cnpj" : '023.967.571-13',
-                    "cf_df" : 'DF',
-                    "tb_locadouro": {
-                        "endereco": 'SHIS QI 29 Conjunto 6',
-                        "bairro": 'Lago Sul',
-                        "cidade": 'Brasília'
-                    },
-                    "telefone" : '(61) 982-023-359',
-                    "responsavel" : 'Radamés Roriz',
-                    "email" : 'radamesroriz@gmail.com',
-                    "rg" : '2662691',
-                    "cpf" : '023.967.571-13',
-                    "tb_correspondencia": {
-                        "name": 'João da Silva',
-                        "telefone": '(61) 982-023-359',
-                        "tb_locadouro": {
-                            "endereco": 'SHIS QI 29 Conjunto 7',
-                            "cidade": 'Brasília',
-                            "cep": '71675-260'
-                        }
-                    },
-                    "tb_empreendimento": {
-                        "localizacao": 'Perto do Supermecado',
-                        "tb_locadouro": {
-                            "bairro": 'Lago Sul',
-                            "cidade": 'Brasília',
-                            "cep": '71675-260',
-                        },
-                    },
-                    "atividade_area" : '40',
-                    "atividade_descricao" : ''
-                },
-                "tipo_atividade": 'Indústria',
-                "fase_empreendimento": 'Em implantação',
-                "situacao_imovel": 'Posse',
-                "abastecimento_agua": 'Poço/cisterna',
-                "efluente_liquido": 'Óleo',
-                "destino_lixo": 'SLU',
-                "destino_efluente": 'CAESB',
-                "tipo_lixo_gerado": 'Comercial'
-            },{
-                id: 1,
-                "tb_licenciamento_status": [{
-                    'dta': '2016-05-02',
-                    'td_tipos_licenciamento': 'Licença de Instalação - LI'
-                },{
-                    'dta': '2016-04-02',
-                    'td_tipos_licenciamento': 'Licença Prévia - LP'
-                }],
-                "ibram_processo": '222222222222/222222222',
-                "tb_requerente" : {
-                    "name" : 'João da Silva',
-                    "cpf_cnpj" : '023.967.571-13',
-                    "cf_df" : 'DF',
-                    "tb_locadouro": {
-                        "endereco": 'SHIS QI 29 Conjunto 6',
-                        "bairro": 'Lago Sul',
-                        "cidade": 'Brasília'
-                    },
-                    "telefone" : '(61) 982-023-359',
-                    "responsavel" : 'Radamés Roriz',
-                    "email" : 'radamesroriz@gmail.com',
-                    "rg" : '2662691',
-                    "cpf" : '023.967.571-13',
-                    "tb_correspondencia": {
-                        "name": 'João da Silva',
-                        "telefone": '(61) 982-023-359',
-                        "tb_locadouro": {
-                            "endereco": 'SHIS QI 29 Conjunto 7',
-                            "cidade": 'Brasília',
-                            "cep": '71675-260'
-                        }
-                    },
-                    "tb_empreendimento": {
-                        "localizacao": 'Perto do Supermecado',
-                        "tb_locadouro": {
-                            "bairro": 'Lago Sul',
-                            "cidade": 'Brasília',
-                            "cep": '71675-260',
-                        },
-                    },
-                    "atividade_area" : '40',
-                    "atividade_descricao" : ''
-                },
-                "tipo_atividade": 'Indústria',
-                "fase_empreendimento": 'Em implantação',
-                "situacao_imovel": 'Posse',
-                "abastecimento_agua": 'Poço/cisterna',
-                "efluente_liquido": 'Óleo',
-                "destino_lixo": 'SLU',
-                "destino_efluente": 'CAESB',
-                "tipo_lixo_gerado": 'Comercial'
-            },{
-                id: 2,
-                "tb_licenciamento_status": [{
-                    'dta': '2016-05-02',
-                    'td_tipos_licenciamento': 'Licençca de Operação - LO'
-                }],
-                "ibram_processo": '111111111111/111111111',
-                "tb_requerente" : {
-                    "name" : 'João da Silva',
-                    "cpf_cnpj" : '023.967.571-13',
-                    "cf_df" : 'DF',
-                    "tb_locadouro": {
-                        "endereco": 'SHIS QI 29 Conjunto 6',
-                        "bairro": 'Lago Sul',
-                        "cidade": 'Brasília'
-                    },
-                    "telefone" : '(61) 982-023-359',
-                    "responsavel" : 'Radamés Roriz',
-                    "email" : 'radamesroriz@gmail.com',
-                    "rg" : '2662691',
-                    "cpf" : '023.967.571-13',
-                    "tb_correspondencia": {
-                        "name": 'João da Silva',
-                        "telefone": '(61) 982-023-359',
-                        "tb_locadouro": {
-                            "endereco": 'SHIS QI 29 Conjunto 7',
-                            "cidade": 'Brasília',
-                            "cep": '71675-260'
-                        }
-                    },
-                    "tb_empreendimento": {
-                        "localizacao": 'Perto do Supermecado',
-                        "tb_locadouro": {
-                            "bairro": 'Lago Sul',
-                            "cidade": 'Brasília',
-                            "cep": '71675-260',
-                        },
-                    },
-                    "atividade_area" : '40',
-                    "atividade_descricao" : ''
-                },
-                "tipo_atividade": 'Indústria',
-                "fase_empreendimento": 'Em implantação',
-                "situacao_imovel": 'Posse',
-                "abastecimento_agua": 'Poço/cisterna',
-                "efluente_liquido": 'Óleo',
-                "destino_lixo": 'SLU',
-                "destino_efluente": 'CAESB',
-                "tipo_lixo_gerado": 'Comercial'
-            },
+        tipos_avaliacao: [
+            {id: 1, name: 'Aprovado'},
+            {id: 2, name: 'Rejeitado'}
         ],
+        licenciamento_status: [{
+            'licenciamento_id': 1,
+            'dta': '2011-05-02',
+            'tipos_licenciamento_id': 1,
+        }, {
+            'licenciamento_id': 1,
+            'dta': '2012-05-02',
+            'tipos_licenciamento_id': 2,
+        }, {
+            'licenciamento_id': 2,
+            'dta': '2013-05-02',
+            'tipos_licenciamento_id': 1,
+        }, {
+            'licenciamento_id': 3,
+            'dta': '2014-05-02',
+            'tipos_licenciamento_id': 1,
+        }, {
+            'licenciamento_id': 3,
+            'dta': '2015-05-02',
+            'tipos_licenciamento_id': 2,
+        }, {
+            'licenciamento_id': 3,
+            'dta': '2016-05-02',
+            'tipos_licenciamento_id': 3
+        }],
+        correspondencia: [{
+            "name": 'correspondencia.name 1',
+            "telefone": 'correspondencia.telefone 1',
+            "locadouro_id": 1
+        },{
+            "name": 'correspondencia.name 2',
+            "telefone": 'correspondencia.telefone 2',
+            "locadouro_id": 2
+        },{
+            "name": 'correspondencia.name 1',
+            "telefone": 'correspondencia.telefone 1',
+            "locadouro_id": 1
+        }],
+        locadouro: [{
+            "endereco": 'Endereco 1',
+            "bairro": 'Bairro 1',
+            "cidade": 'Cidade 1'
+        },{
+            "endereco": 'Endereco 2',
+            "bairro": 'Bairro 2',
+            "cidade": 'Cidade 2'
+        },{
+            "endereco": 'Endereco 3',
+            "bairro": 'Bairro 3',
+            "cidade": 'Cidade 3'
+        },{
+            "endereco": 'Endereco 4',
+            "bairro": 'Bairro 4',
+            "cidade": 'Cidade 4'
+        }],
+        empreendimento: [{
+            "localizacao": 'Perto do Supermecado',
+            "locadouro_id": 1
+        },{
+            "localizacao": 'Tão Tão distante',
+            "locadouro_id": 2
+        }],
+        requerente: [{
+            "name" : 'requerente.name 1',
+            "cpf_cnpj" : '999.999.999-99',
+            "cf_df" : '99.999.999/999-99',
+            "telefone" : '(61) 999-999-999',
+            "responsavel" : 'requerente.responsavel 1',
+            "email" : 'requerente@email1.com',
+            "rg" : '9999999',
+            "cpf" : '999.999.999-99',
+            "atividade_area" : '40',
+            "atividade_descricao" : 'requerente.description 1',
+            "correspondencia_id": 1,
+            "empreendimento_id": 1,
+            "locadouro_id": 1
+        }, {
+            "name" : 'requerente.name 2',
+            "cpf_cnpj" : '999.999.999-99',
+            "cf_df" : '99.999.999/999-99',
+            "telefone" : '(61) 999-999-999',
+            "responsavel" : 'requerente.responsavel 2',
+            "email" : 'requerente@email1.com',
+            "rg" : '9999999',
+            "cpf" : '999.999.999-99',
+            "atividade_area" : '40',
+            "atividade_descricao" : 'requerente.description 2',
+            "correspondencia_id": 1,
+            "empreendimento_id": 1,
+            "locadouro_id": 1
+        }, {
+            "name" : 'requerente.name 3',
+            "cpf_cnpj" : '999.999.999-99',
+            "cf_df" : '99.999.999/999-99',
+            "telefone" : '(61) 999-999-999',
+            "responsavel" : 'requerente.responsavel 3',
+            "email" : 'requerente@email1.com',
+            "rg" : '9999999',
+            "cpf" : '999.999.999-99',
+            "atividade_area" : '40',
+            "atividade_descricao" : 'requerente.description 3',
+            "correspondencia_id": 1,
+            "empreendimento_id": 1,
+            "locadouro_id": 1
+        }],
+        licenciamento: [{
+            "ibram_processo": '111111111111/111111111',
+            "requerente_id" : 1,
+            "tipo_atividade_id": 1,
+            "fase_empreendimento_id": 1,
+            "situacao_imovel_id": 1,
+            "abastecimento_agua_id": 1,
+            "efluente_liquido_id": 1,
+            "destino_lixo_id": 1,
+            "destino_efluente_id": 1,
+            "tipo_lixo_gerado_id": 1
+        }, {
+            "ibram_processo": '222222222222/222222222',
+            "requerente_id" : 1,
+            "tipo_atividade_id": 2,
+            "fase_empreendimento_id": 2,
+            "situacao_imovel_id": 2,
+            "abastecimento_agua_id": 2,
+            "efluente_liquido_id": 2,
+            "destino_lixo_id": 2,
+            "destino_efluente_id": 2,
+            "tipo_lixo_gerado_id": 2
+        }, {
+            "ibram_processo": '3333333333333/333333333',
+            "requerente_id" : 3,
+            "tipo_atividade_id": 3,
+            "fase_empreendimento_id": 3,
+            "situacao_imovel_id": 3,
+            "abastecimento_agua_id": 3,
+            "efluente_liquido_id": 3,
+            "destino_lixo_id": 3,
+            "destino_efluente_id": 3,
+            "tipo_lixo_gerado_id": 3
+        }],
     }
     var prefix = 'licagro_';
     localStorage.clear();
     _.each(seed, function(model, key){
+        _.each(model, function(m, key){
+            if(!m.id){
+                m.id = key+1;
+            }
+        });
         localStorage.setItem(prefix + key, JSON.stringify(model));
     });
     </script>

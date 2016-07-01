@@ -1,10 +1,10 @@
-<div ng-controller="LicenciamentoLiLoEditCtrl">
+<div ng-controller="LicenciamentoAvaliacaoCtrl">
   <form name="crudForm" novalidate data-form-validate-exit ng-submit="search()">
   
     <div layout="column" ng-cloak>
       <md-toolbar class="md-primary">
         <div class="md-toolbar-tools">
-          <h2 class="md-flex">Incluir Licença</h2>
+          <h2 class="md-flex">Avaliar</h2>
         </div>
       </md-toolbar>
       <md-content flex layout-padding>    
@@ -67,9 +67,6 @@
             </div>
 
 
-            <div class="row formButtons">
-              <button class="btn btnDefault pull-right" ng-click="include(model.id)">Incluir</button>
-            </div>
             <div class="row">
               <table class="table">
                 <thead>
@@ -84,8 +81,9 @@
                   <tr ng-repeat="status in model.tb_licenciamento_status | orderBy: '+dta' ">
                     <td>{{status.td_tipos_licenciamento}}</td>
                     <td>{{status.dta}}</td>
-                    <td>{{status.tb_avaliacao.td_tipos_avaliacao}}</td>
-                    <td>{{status.tb_avaliacao.observacao}}</td>
+                    <td>{{status.tb_avaliacao[0].td_tipos_avaliacao}}</td>
+                    <td>{{status.tb_avaliacao[0].description}}</td>
+                    <td><button class="btn btnDefault pull-right" ng-click="include($index)">Incluir</button></td>
                   </tr>
                 </tbody>
               </table>

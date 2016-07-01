@@ -6,31 +6,39 @@
       menus.list = [{
         "icon": "icon iconSign",
         "name": "Licença",
+        "href": "#/",
         "displaySubmenu": true,
-        "href": false,
         "subMenu": [{
           "name": "Inclusão",
           "displaySubmenu": true,
-          "href": false,
+          "icon": "fa fa-plus",
           "subMenu": [{
+            "icon": "fa fa-newspaper-o fa-blue",
             "name": "Licença Prévia",
             "href": "#/licenciamento/edit",
           }, {
+            "icon": "fa fa-newspaper-o fa-green",
             "name": "Licença de Instalação",
             "href": "#licenciamento/edit-li-lo?type=2",
           }, {
+            "icon": "fa fa-newspaper-o fa-red",
             "name": "Licença de Operação",
             "href": "#licenciamento/edit-li-lo?type=3",
           }]
-        }, {
-          "name": "Avaliação",
-          "displaySubmenu": false,
-          "href": false,
-        }, {
-          "name": "Relatórios",
-          "displaySubmenu": false,
-          "href": false,
         }]
+      }, {
+        "icon": "fa fa-external-link-square",
+        "name": "Emitir Licença",
+        "displaySubmenu": false,
+      }, {
+        "icon": "fa fa-search",
+        "name": "Avaliação",
+        "displaySubmenu": false,
+        "href": '#licenciamento/avaliar',
+      }, {
+        "icon": "fa fa-print",
+        "name": "Relatórios",
+        "displaySubmenu": false,
       }, {
         "icon": "icon iconLogout",
         "name": "Sair",

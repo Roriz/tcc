@@ -113,7 +113,7 @@ angular.module('licagro').directive("gridCustom", function() {
               params = _.merge(($scope.datasource.params ? $scope.datasource.params : {}), params);
 
               var query = angular.toJson(params);
-              $scope.datasource.collection.paged(angular.fromJson(query), function(data) {
+              new $scope.datasource.collection().paged(angular.fromJson(query), function(data) {
                 $scope.exportData.currentData = data;
                 params.successCallback($scope.exportData.currentData, ($scope.exportData.currentData.length ? $scope.exportData.currentData[0].totalrows : 0));
 

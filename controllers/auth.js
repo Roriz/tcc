@@ -13,6 +13,11 @@ var Home = module.exports = function() {
     });
   });
 
+
+  this.router.get('/consulta-cliente', function(req, res, next) {
+    res.render('consulta-cliente.html', {});
+  });
+
   this.router.post('/ajax', function(req, res, next) {
     passport.authenticate('local', function(err, user, info) {
       if (err) {

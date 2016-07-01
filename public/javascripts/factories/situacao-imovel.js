@@ -1,5 +1,8 @@
 var app = angular.module('licagro');
 
 app.factory('SituacaoImovel', function(DefaultORM) {
-  return _.extend(DefaultORM('situacao_imovel'), {});
+  return function() {
+    var self = this;
+    self = _.extend(self, DefaultORM('situacao_imovel'));
+  };
 });

@@ -2,6 +2,7 @@ var app = angular.module('licagro');
 
 app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location', '$mdDialog',
   function($scope, Licenciamento, $location, $mdDialog) {
+    $scope.model = new Licenciamento();
 
     $scope.dataGrid = {
       buttons: [{
@@ -12,160 +13,76 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
       modelName: 'licenciamento',
       collection: Licenciamento,
       columnDefs: [{
-          headerName: "ID",
-          field: "id",
-          sort: 'desc',
-          hide: ISMOBILE,
-          onCellClicked: function(ngGridData) {
-            $scope.$apply(function() {
-              $location.path('/licenciamento/show/' + ngGridData.data.id);
-            })
-          },
-          minWidth: 70,
-          maxWidth: 70,
-        }, {
-          headerName: "Processo",
-          field: "ibram_processo",
-          onCellClicked: function(ngGridData) {
-            $scope.$apply(function() {
-              $location.path('/licenciamento/show/' + ngGridData.data.id);
-            })
-          },
-        }, {
-          headerName: "Nome do Requerente",
-          field: "tb_requerente.name",
-          valueGetter: function(ngGridData) {
-            return _.get(ngGridData.data, ngGridData.colDef.field);
-          },
-          onCellClicked: function(ngGridData) {
-            $scope.$apply(function() {
-              $location.path('/licenciamento/show/' + ngGridData.data.id);
-            });
-          },
+        headerName: "Processo",
+        field: "ibram_processo",
+        onCellClicked: function(ngGridData) {
+          $scope.$apply(function() {
+            $location.path('/licenciamento/show/' + ngGridData.data.id);
+          })
         },
-        // {
-        //   headerName: "Nome do Destinatario",
-        //   field: "tb_requerente.tb_correspondencia.name",
-        //   hide: ISMOBILE,
-        //   valueGetter: function(ngGridData) {
-        //     return _.get(ngGridData.data, ngGridData.colDef.field);
-        //   },
-        //   onCellClicked: function(ngGridData) {
-        //     $scope.$apply(function() {
-        //       $location.path('/licenciamento/show/' + ngGridData.data.id);
-        //     });
-        //   },
-        // }, 
-        {
-          headerName: "Localização",
-          field: "tb_requerente.tb_empreendimento.localizacao",
-          hide: ISMOBILE,
-          valueGetter: function(ngGridData) {
-            return _.get(ngGridData.data, ngGridData.colDef.field);
-          },
-          onCellClicked: function(ngGridData) {
-            $scope.$apply(function() {
-              $location.path('/licenciamento/show/' + ngGridData.data.id);
-            })
-          },
-        }, {
-          headerName: "Status",
-          field: "tb_licenciamento_status",
-          valueGetter: function(ngGridData) {
-            return Licenciamento.last_status(_.get(ngGridData.data, ngGridData.colDef.field)).td_tipos_licenciamento;
-          },
-          onCellClicked: function(ngGridData) {
-            $scope.status(ngGridData.data.id);
-          }
-        }, {
-          headerName: "Prorrogar",
-          field: "id",
-          onCellClicked: function(ngGridData) {
-            $scope.prorrogar(ngGridData.data.id);
-          },
-          cellRenderer: function(ngGridData) {
-            if (Licenciamento.last_status(ngGridData.data.tb_licenciamento_status).td_tipos_licenciamento == 'Licença Prévia - LP' ||
-              Licenciamento.last_status(ngGridData.data.tb_licenciamento_status).td_tipos_licenciamento == 'Licença de Instalação - LI') {
-              return '<md-button class="md-warn md-raised">Inserir</md-button>';
-            } else {
-              return '';
-            }
-          }
-        }, {
-          headerName: "Renovação",
-          field: "id",
-          onCellClicked: function(ngGridData) {
-            $scope.renovar(ngGridData.data.id);
-          },
-          cellRenderer: function(ngGridData) {
-            if (Licenciamento.last_status(ngGridData.data.tb_licenciamento_status).td_tipos_licenciamento == 'Licençca de Operação - LO') {
-              return '<md-button class="md-primary md-raised">Inserir</md-button>';
-            } else {
-              return '';
-            }
-          }
-        }, {
-          headerName: "Editar",
-          field: "id",
-          cellRenderer: function(params) {
-            return '<a href="#licenciamento/edit/' + params.value + '" class="btn icon iconEdit btnPrimary"></a>';
-          }
+      }, {
+        headerName: "Nome do Requerente",
+        field: "requerente.name",
+        valueGetter: function(ngGridData) {
+          return _.get(ngGridData.data, ngGridData.colDef.field);
+        },
+        onCellClicked: function(ngGridData) {
+          $scope.$apply(function() {
+            $location.path('/licenciamento/show/' + ngGridData.data.id);
+          });
+        },
+      }, {
+        headerName: "Localização",
+        field: "requerente.empreendimento.localizacao",
+        hide: ISMOBILE,
+        valueGetter: function(ngGridData) {
+          return _.get(ngGridData.data, ngGridData.colDef.field);
+        },
+        onCellClicked: function(ngGridData) {
+          $scope.$apply(function() {
+            $location.path('/licenciamento/show/' + ngGridData.data.id);
+          })
+        },
+      }, {
+        headerName: "Status",
+        field: "licenciamento_status",
+        valueGetter: function(ngGridData) {
+          return $scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)).td_tipos_licenciamento;
+        },
+        onCellClicked: function(ngGridData) {
+          $scope.status(ngGridData.data.id);
         }
-      ]
+      }, {
+        headerName: "Situação",
+        field: "licenciamento_status",
+        valueGetter: function(ngGridData) {
+          return $scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)).td_tipos_licenciamento;
+        },
+        onCellClicked: function(ngGridData) {
+          $scope.status(ngGridData.data.id);
+        }
+      }, {
+        //     headerName: "Actions",
+        //     field: "id",
+        //     cellRenderer: function(params) {
+        //       var prorrogar = $scope.model.can_prorrogar(params.data) ? '<md-button class="md-warn md-raised" ng-click="prorrogar(' + params.data.id + ')">Prorrogar</md-button>' : '';
+        //       var renovar = $scope.model.can_renovar(params.data) ? '<md-button class="md-warn md-raised" ng-click="renovar(' + params.data.id + ')">Renovar</md-button>' : '';
+        //       return prorrogar + renovar;
+        //     }
+        //   }]
+        // };
+        headerName: "Actions",
+        field: "id",
+        cellRenderer: function(params) {
+          params.$scope.prorrogar = $scope.prorrogar;
+          params.$scope.renovar = $scope.renovar;
+          var prorrogar = $scope.model.can_prorrogar(params.data) ? '<md-button class="md-warn md-raised" ng-click="prorrogar(' + params.data.id + ')">Prorrogar</md-button>' : '';
+          var renovar = $scope.model.can_renovar(params.data) ? '<md-button class="md-warn md-raised" ng-click="renovar(' + params.data.id + ')">Renovar</md-button>' : '';
+          return renovar + prorrogar;
+        }
+      }]
     };
 
-    var saveDialog = function(answer, attrs) {
-      if (answer) {
-        Licenciamento.get(id, function(model) {
-          model = _.extend(model, attrs);
-          Licenciamento.update(model, function() {
-            $mdDialog.hide(answer);
-            alertify.success('Licenciamento atualizado com sucesso!')
-          });
-        });
-      } else {
-        $mdDialog.hide(answer);
-      }
-    }
-
-    $scope.status = function(id) {
-      $mdDialog.show({
-        controller: function($scope, $mdDialog) {
-
-          $scope.tipos_licenciamento = JSON.parse(localStorage.getItem('tipos_licenciamento'));
-          $scope.dta = false;
-          $scope.td_tipos_licenciamento = false;
-          Licenciamento.get(id, function(model) {
-            $scope.model = model;
-            $scope.model.tb_licenciamento_status = _.sortBy($scope.model.tb_licenciamento_status, function(o) {
-              return o.dta;
-            });
-          });
-
-
-          $scope.answer = function(answer) {
-            if (answer) {
-              Licenciamento.get(id, function(model) {
-                model.tb_licenciamento_status.push({
-                  td_tipos_licenciamento: $scope.td_tipos_licenciamento,
-                  dta: $scope.dta.getFullYear() + '-' + _.padStart(($scope.dta.getMonth() + 1), 2, '0') + '-' + $scope.dta.getDate()
-                });
-                Licenciamento.update(model, function() {
-                  $mdDialog.hide(answer);
-                  alertify.success('Licenciamento atualizado com sucesso!')
-                });
-              });
-            } else {
-              $mdDialog.hide(answer);
-            }
-          };
-        },
-        templateUrl: '/javascripts/views/licenciamento/status.html',
-        parent: angular.element(document.body),
-        clickOutsideToClose: true,
-        fullscreen: true
-      });
-    }
     $scope.renovar = function(id) {
       $mdDialog.show({
         controller: function($scope, $mdDialog) {
@@ -181,6 +98,9 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
         clickOutsideToClose: true,
         fullscreen: true
       });
+    }
+    this.prorrogar = function(id) {
+      console.log('prorrogar');
     }
     $scope.prorrogar = function(id) {
       $mdDialog.show({
@@ -211,7 +131,7 @@ app.controller('LicenciamentoShowCtrl', ['$scope', '$routeParams', 'Licenciament
     $scope.afterRender = function() {};
     $scope.model = {};
     $scope.model.id = $routeParams.id;
-    Licenciamento.get($scope.model.id, function(r) {
+    $scope.model.get($scope.model.id, function(r) {
       $scope.model = r;
     });
   }
@@ -222,32 +142,32 @@ app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope',
   'SituacaoImovel', 'DestinoEfluente', 'FaseEmpreendimento', 'DestinoLixo', 'EfluenteLiquido', 'AbastecimentoAgua', 'TipoLixoGerado', 'TipoAtividade', 'TiposLicenciamento',
   function(Licenciamento, $location, $scope, $routeParams, $rootScope,
     SituacaoImovel, DestinoEfluente, FaseEmpreendimento, DestinoLixo, EfluenteLiquido, AbastecimentoAgua, TipoLixoGerado, TipoAtividade, TiposLicenciamento) {
-    $scope.model = Licenciamento;
-    SituacaoImovel.query({}, function(r) {
+    $scope.model = new Licenciamento();
+    new SituacaoImovel().query({}, function(r) {
       $scope.situacao_imovel = r;
     });
-    DestinoEfluente.query({}, function(r) {
+    new DestinoEfluente().query({}, function(r) {
       $scope.destino_efluente = r;
     });
-    FaseEmpreendimento.query({}, function(r) {
+    new FaseEmpreendimento().query({}, function(r) {
       $scope.fase_empreendimento = r;
     });
-    DestinoLixo.query({}, function(r) {
+    new DestinoLixo().query({}, function(r) {
       $scope.destino_lixo = r;
     });
-    EfluenteLiquido.query({}, function(r) {
+    new EfluenteLiquido().query({}, function(r) {
       $scope.efluente_liquido = r;
     });
-    AbastecimentoAgua.query({}, function(r) {
+    new AbastecimentoAgua().query({}, function(r) {
       $scope.abastecimento_agua = r;
     });
-    TipoLixoGerado.query({}, function(r) {
+    new TipoLixoGerado().query({}, function(r) {
       $scope.tipo_lixo_gerado = r;
     });
-    TipoAtividade.query({}, function(r) {
+    new TipoAtividade().query({}, function(r) {
       $scope.tipo_atividade = r;
     });
-    TiposLicenciamento.query({}, function(r) {
+    new TiposLicenciamento().query({}, function(r) {
       $scope.tipos_licenciamento = r;
     });
 
@@ -257,7 +177,7 @@ app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope',
     $scope.model.tb_licenciamento_status[0].dta = new Date();
 
     if ($routeParams.id) {
-      Licenciamento.get($routeParams.id, function(r) {
+      $scope.model.get($routeParams.id, function(r) {
         $scope.model = r;
       });
     }
@@ -276,23 +196,23 @@ app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope',
         model.tb_licenciamento_status = [];
         model.tb_licenciamento_status.push(tb_licenciamento_status);
 
-        Licenciamento.update(model, function(response) {
+        $scope.model.update(model, function(response) {
           $rootScope.canChangeRouter = true;
           window.loading(false);
           alertify.success('Licenciamento atualizado com sucesso!');
           if ($scope.model.new == 1) {
-            $scope.model = Licenciamento;
+            $scope.model = new Licenciamento();
           } else {
             $location.path("licenciamento/show/" + response.id);
           }
         });
       } else {
-        Licenciamento.create(model, function(response) {
+        $scope.model.create(model, function(response) {
           $rootScope.canChangeRouter = true;
           window.loading(false);
           alertify.success('Licenciamento cadastrado com sucesso!');
           if ($scope.model.new == 1) {
-            $scope.model = Licenciamento;
+            $scope.model = new Licenciamento();
           } else {
             $location.path("licenciamento/show/" + response.id);
           }
@@ -306,11 +226,11 @@ app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope',
 
 app.controller('LicenciamentoLiLoEditCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope', '$mdDialog', 'TiposLicenciamento', 'DateToDB',
   function(Licenciamento, $location, $scope, $routeParams, $rootScope, $mdDialog, TiposLicenciamento, DateToDB) {
-    $scope.model = Licenciamento;
+    $scope.model = new Licenciamento();
     $FatherScope = $scope;
 
     $scope.search = function() {
-      Licenciamento.query({
+      $scope.model.query({
         ibram_processo: $scope.model.ibram_processo
       }, function(d) {
         d = _.first(d);
@@ -323,7 +243,7 @@ app.controller('LicenciamentoLiLoEditCtrl', ['Licenciamento', '$location', '$sco
     $scope.include = function(id) {
       $mdDialog.show({
         controller: function($scope, $mdDialog) {
-          $scope.model = Licenciamento;
+          $scope.model = new Licenciamento();
           TiposLicenciamento.query({}, function(r) {
             $scope.tipos_licenciamento = r;
           });
@@ -335,12 +255,12 @@ app.controller('LicenciamentoLiLoEditCtrl', ['Licenciamento', '$location', '$sco
 
           $scope.answer = function(answer) {
             if (answer) {
-              Licenciamento.get(id, function(model) {
+              $scope.model.get(id, function(model) {
                 model.tb_licenciamento_status.push({
                   td_tipos_licenciamento: $scope.td_tipos_licenciamento,
                   dta: DateToDB($scope.dta)
                 });
-                Licenciamento.update(model, function(r) {
+                $scope.model.update(model, function(r) {
                   r.showDetails = true;
                   $FatherScope.model = r;
                   $mdDialog.hide(answer);
@@ -353,6 +273,62 @@ app.controller('LicenciamentoLiLoEditCtrl', ['Licenciamento', '$location', '$sco
           };
         },
         templateUrl: '/javascripts/views/licenciamento/status.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true,
+        fullscreen: true
+      });
+    }
+  }
+]);
+
+app.controller('LicenciamentoAvaliacaoCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope', '$mdDialog', 'DateToDB', 'TiposAvaliacao',
+  function(Licenciamento, $location, $scope, $routeParams, $rootScope, $mdDialog, DateToDB, TiposAvaliacao) {
+    $scope.model = new Licenciamento();
+    $FatherScope = $scope;
+
+    $scope.search = function() {
+      $scope.model.query({
+        ibram_processo: $scope.model.ibram_processo
+      }, function(d) {
+        d = _.first(d);
+        $scope.model = _.extend(d, $scope.model);
+        $scope.model.showDetails = true;
+      })
+    }
+
+
+    $scope.include = function(index) {
+      $mdDialog.show({
+        controller: function($scope, $mdDialog) {
+          $scope.model = new Licenciamento();
+          TiposAvaliacao.query({}, function(r) {
+            $scope.tipos_avaliacao = r;
+            $scope.td_tipos_avaliacao = r[0].name;
+          });
+          $scope.dta = new Date();
+
+          $scope.answer = function(answer) {
+            if (answer) {
+              if (!$FatherScope.model.tb_licenciamento_status[index]['tb_avaliacao']) {
+                $FatherScope.model.tb_licenciamento_status[index]['tb_avaliacao'] = [];
+              }
+              $FatherScope.model.tb_licenciamento_status[index]['tb_avaliacao'].push({
+                dta: DateToDB($scope.dta),
+                description: $scope.description,
+                td_tipos_avaliacao: $scope.td_tipos_avaliacao
+              });
+
+              $scope.model.update($FatherScope.model, function(r) {
+                r.showDetails = true;
+                $mdDialog.hide(answer);
+                alertify.success('Licenciamento atualizado com sucesso!')
+              });
+            } else {
+              $mdDialog.hide(answer);
+            }
+          };
+        },
+        templateUrl: '/javascripts/views/licenciamento/dialog-avaliar.html',
         parent: angular.element(document.body),
         clickOutsideToClose: true,
         fullscreen: true

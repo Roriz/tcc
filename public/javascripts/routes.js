@@ -22,6 +22,9 @@ app.config(['$routeProvider',
       .when('/licenciamento/edit-li-lo', {
         templateUrl: '/javascripts/views/licenciamento/edit-li-lo.html'
       })
+      .when('/licenciamento/avaliar', {
+        templateUrl: '/javascripts/views/licenciamento/avaliar.html'
+      })
       .when('', {
         redirectTo: '/licenciamento'
       })

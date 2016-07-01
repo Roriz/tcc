@@ -1,0 +1,43 @@
+<md-dialog aria-label="Alterar Status" ng-cloak style="width:50%;">
+  <form name="crudForm" novalidate>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Avaliar</h2>
+      </div>
+    </md-toolbar>
+      
+    <br/>
+    <md-dialog-content>
+      <div layout="column" ng-cloak class="col-md-6">
+        <div class="row">
+          <label>Situação</label>
+        </div>
+        <div class="row">
+          <md-radio-group required ng-model="td_tipos_avaliacao">
+            <md-radio-button ng-repeat="value in tipos_avaliacao" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+          </md-radio-group>
+        </div>
+        <div class="row">
+          <label>Data</label>
+        </div>
+        <div class="row">
+          <md-datepicker ng-model="dta" md-placeholder="DD/MM/YYYY"></md-datepicker>
+        </div>
+        <div class="row">
+          <label>Description</label>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <textarea row="5" class="form-control" ng-model="description"></textarea>
+          </div>
+        </div>
+      </div>
+
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="answer(true)">Salvar</md-button>
+      <md-button ng-click="answer(false)">Cancelar</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

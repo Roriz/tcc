@@ -21,44 +21,92 @@
 			height: 100%;
 		}
 
+		[data-consulta]{
+			background-color: #fff;
+			padding: 20px;
+			width: 800px;
+		}
+
+
 	</style>
 
 </head>
 
 <body class="blackBackbound">
-	<div class="loginForm">
-		<div class="logo" style="color:white; font-size:15px;">
+	<div class="loginForm loginRequest">
+		<div class="logo" style="color:white; font-size: 20px;">
 			<div class="row">
 				<img src="/images/fuck uniceub.png">
 			</div>
 			<div class="row">
-				LICAGRO - Sistema de Controle de Licenciamento Ambiental para Revendedoras de Produtos Agrotóxicos
+				Consulta do cliente
 			</div>
 		</div>
-
-		<div class="row formField">
-			<span class="error hide" data-error="1">Email ou senha não confere.</span>
-			<span class="error hide" data-error="2">Usuário não habilitado para backoffice</span>
-		</div>
-
-		<form class="LoginInputs" method="POST" action="/auth">
-			
+		<form>
 			<div class="row formField">
-				<input name="username" class="inputBlack iconInput iconUser" required/>
+				<input name="processo" class="inputBlack" placeholder="Processo" required/>
 			</div>
-			<div class="row formField">
-				<input type="password" name="password" class="inputBlack iconInput iconKey" required/>
-			</div>
-			
-			<div class="formButtons">
-				<button class="btn btnClear btnRow btnDefault">Entrar</button>
-			</div>
-	
-			<div class="formLinks">
-				<a href="/auth/consulta-cliente">Consulta do cliente</a>
-			</div>
-
+				
 		</form>
+		
+		<div class="formButtons">
+			<button class="btn btnClear btnRow btnDefault" onclick="$('[data-consulta]').removeClass('hide')">Consultar</button>
+		</div>
+
+		<div data-consulta class="hide">
+			<div class="row">
+				<div class="form-group">
+					<label>Processo:</label>
+					<span>22222.222222/22222-222</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label>Empresa:</label>
+					<span>Coca-Cola</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<label>Resposável:</label>
+					<span>Raissinha</span>
+				</div>
+			</div>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Licença</th>
+						<th>Data da Solicitação</th>
+						<th>Situação</th>
+						<th>Data da Avaliação</th>
+						<th>Avaliação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Licença Prévia</td>
+						<td>2015-05-06</td>
+						<td>Aprovado</td>
+						<td>2015-06-06</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>Licença de Instalação</td>
+						<td>2016-05-06</td>
+						<td>Aprovado</td>
+						<td>2015-06-06</td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="formLinks">
+			<a href="/">Login</a>
+		</div>
+
+
 
 		<script type="text/javascript">
 			function getUrlVars() {
