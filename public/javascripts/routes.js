@@ -28,6 +28,9 @@ app.config(['$routeProvider',
       .when('/home', {
         templateUrl: '/javascripts/views/layout/home.html'
       })
+      .when('/consulta', {
+        templateUrl: '/javascripts/views/reports/consulta.html'
+      })
       .when('', {
         redirectTo: '/home'
       })
@@ -39,34 +42,4 @@ app.config(['$routeProvider',
       });
 
   }
-])
-  .run(['$rootScope', '$location', 'menus', '$routeParams', '$route',
-
-    function($rootScope, $location, menus, $routeParams, $route) {
-      $rootScope.$on("$routeChangeStart", function(event, next, current) {
-        // if ($rootScope.canChangeRouter === false) {
-        //   alertify.dialog('confirm')
-        //     .set({
-        //       transition: 'fade',
-        //       'title': 'Mudar rota',
-        //       'message': 'Tem certeza que deseja sair deste formulário? Você irá perder as alterações relaizadas nele.',
-        //       'onok': function() {
-        //         $rootScope.canChangeRouter = true;
-        //         $location.path(next.$$route.originalPath);
-        //         $route.reload();
-        //       }
-        //     }).show();
-        //   event.preventDefault();
-        // }
-      });
-      $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
-        // if (next.$$route) {
-        //   var pathToSearch = next.$$route.originalPath.replace(/\/\:(\w+)/, '');
-        //   if ($routeParams && $routeParams.showBread) {
-        //     pathToSearch += "?" + $.param($routeParams);
-        //   }
-        //   menus.bread = menus.findbread(menus.list, pathToSearch);
-        // }
-      });
-    }
-  ]);
+]);

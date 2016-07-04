@@ -17,7 +17,11 @@ _.each(seed, function(info) {
     _.each(info[0].rows, function(row) {
       var line = {};
       _.each(row, function(d, key) {
-        line[columns[key]] = d;
+        if (_.isObject(d)) {
+          line[columns[key]] = null;
+        } else {
+          line[columns[key]] = d;
+        }
       });
 
       if (has_id === false) {

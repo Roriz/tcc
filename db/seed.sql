@@ -88,7 +88,7 @@ INSERT INTO licagro.tb_licenciamento_status (tb_licenciamento_id, td_situacao_id
 
 
 -- ------------------------------------------------------------------------------------------------------ licagro.tb_avaliacao
-INSERT INTO licagro.tb_avaliacao (td_tipos_avaliacao_id, tb_licenciamento_status_id, dta, dta_limite, observacao, dta_criacao, dta_atualizacao) VALUES (1, 3, "2016-01-03", "2016-07-03", null, now(), now()), (2, 5, "2016-01-03", "2016-07-03", null, now(), now());
+INSERT INTO licagro.tb_avaliacao (td_tipos_avaliacao_id, tb_licenciamento_status_id, dta, dta_limite, observacao, dta_criacao, dta_atualizacao) VALUES (1, 3, "2016-01-03", "2016-07-03", null, now(), now()), (2, 5, "2016-01-03", "2016-07-03", "Qualidade apresentada não esta no mínimo padrão exigido", now(), now());
 
 
 

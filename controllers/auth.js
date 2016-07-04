@@ -36,6 +36,7 @@ var Home = module.exports = function() {
   });
 
   this.router.post('/', function(req, res, next) {
+    console.log('post /')
     passport.authenticate('local', function(err, user, info) {
       if (err) {
         return next(err);

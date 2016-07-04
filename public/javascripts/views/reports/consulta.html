@@ -1,0 +1,99 @@
+<div ng-controller="ConsultaCtrl">
+  <form name="crudForm" novalidate data-form-validate-exit ng-submit="search()">
+  
+    <div layout="column" ng-cloak>
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Incluir Licença</h2>
+        </div>
+      </md-toolbar>
+      <md-content flex layout-padding>    
+
+        <div layout="column" ng-cloak>
+          <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+              <h2 class="md-flex">Processo</h2>
+            </div>
+          </md-toolbar>
+          <md-content flex layout-padding>
+            <div class="row">
+              <div class="formField col-md-12">
+                <label for="ibram_processo">Processo: <required/></label>
+                <input 
+                  id="ibram_processo" 
+                  name="ibram_processo" 
+                  ng-model="model.ibram_processo" 
+                  autocomplete="off" 
+                  ui-mask-placeholder  
+                  model-view-value="true" 
+                  ui-mask='9999.999/999-99' 
+                  required 
+                  ng-change="model.showDetails = false"/>
+              </div>
+            </div>
+            <div class="row formButtons">
+              <button class="btn btnDefault" ng-disabled="crudForm.$invalid">Buscar</button>
+            </div>
+          </md-content>
+        </div>
+
+        <div layout="column" ng-cloak ng-if="model.showDetails">
+          <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+              <h2 class="md-flex">Dados da Licença</h2>
+            </div>
+          </md-toolbar>
+          <md-content flex layout-padding>
+            <div class="row">
+              <div class="formField col-md-12">
+                <label for="tb_requerente.nome">Protocolo: </label>
+                {{model.ibram_processo}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="formField col-md-12">
+                <label for="tb_requerente.nome">Empresa: </label>
+                {{model.tb_requerente.nome}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="formField col-md-12">
+                <label for="tb_requerente.nome">Responsável: </label>
+                {{model.tb_responsavel.nome}}
+              </div>
+            </div>
+
+            <div class="row">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th rowspan="2">Status</th>
+                    <th rowspan="2">Data Solicitação</th>
+                    <th rowspan="2">Data Limite</th>
+                    <th colspan="3">Última Avaliação</th>
+                  </tr>
+                  <tr>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="status in model.tb_licenciamento_status | orderBy: '+dta' ">
+                    <td>{{status.td_situacao.td_status.nome}} - {{status.td_situacao.nome}}</td>
+                    <td>{{status.dta_inicial}}</td>
+                    <td>{{status.dta_limite}}</td>
+                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).dta : '' }}</td>
+                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).td_tipos_avaliacao.nome : '' }}</td>
+                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).observacao : '' }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </md-content>
+        </div>
+      </md-content>
+    </div>
+
+  </form>
+</div>

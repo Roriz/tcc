@@ -45,7 +45,7 @@ function initApp() {
   var app = express();
   var http = require('http');
   var multipart = require('connect-multiparty');
-  // var flash = require('connect-flash');
+  var flash = require('connect-flash');
 
   var port = 3001;
 
@@ -61,7 +61,7 @@ function initApp() {
   // uncomment after placing your favicon in /public
   // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
   app.use(logger('dev'));
-  // app.use(flash());
+  app.use(flash());
   app.use(cookieParser());
   app.use(bodyParser.urlencoded({
     extended: false,

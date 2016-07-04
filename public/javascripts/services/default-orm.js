@@ -76,17 +76,21 @@ app.factory('DefaultORM', function() {
       as_json: function(d, cb) {
         var self = this;
         if (_.isArray(d)) {
-          var sync = 0;
-          var collection = [];
-          _.each(d, function(model) {
-            sync++;
-            self.get_relations(model, function(resp) {
-              collection.push(resp);
-              if (d.length <= sync) {
-                cb(collection);
-              }
+          if (d.length) {
+            var sync = 0;
+            var collection = [];
+            _.each(d, function(model) {
+              sync++;
+              self.get_relations(model, function(resp) {
+                collection.push(resp);
+                if (d.length <= sync) {
+                  cb(collection);
+                }
+              });
             });
-          });
+          } else {
+            cb(d);
+          }
         } else {
           self.get_relations(d, function(model) {
             cb(model);

@@ -100,10 +100,24 @@
 			})
 
 			$('[data-gest-login]').on('click', function(){
-				var form = $('<form>').attr({method: 'POST', action: '/auth'});
-				form.append($('<input>').attr({name: 'username'}).val('gest'))
-				form.append($('<input>').attr({name: 'password'}).val('gest'))
-				form.trigger('submit');
+				$.ajax({
+					method: "POST",
+					url: "/auth/ajax",
+					data: {
+						username: 'gest',
+						password: 'gest'
+					},
+  					dataType: "json"
+				}).done(function( res ) {
+					$('.error[data-error]').addClass('hide');
+					if(res.user_not_found){
+						$('.error[data-error=1]').removeClass('hide');
+						$('[name=password]').val('');
+					}else{
+						window.location = '/';
+					}
+				});
+				return false;
 			});
 
 

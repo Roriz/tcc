@@ -5,6 +5,11 @@
       menus.bread = [];
       if (window.CURRENTUSER.type == 1) {
         menus.list = [{
+          "icon": "fa fa-home",
+          "name": "Inicial",
+          "href": "/home",
+          "displaySubmenu": false,
+        }, {
           "icon": "icon iconSign",
           "name": "Licença",
           "href": "#/",
@@ -48,8 +53,14 @@
         }];
       } else if (window.CURRENTUSER.type == 2) {
         menus.list = [{
+          "icon": "fa fa-home",
+          "name": "Inicial",
+          "href": "#home",
+          "displaySubmenu": false,
+        }, {
           "icon": "fa fa-external-link-square",
           "name": "Consulta",
+          "href": "#consulta",
           "displaySubmenu": false,
         }, {
           "icon": "icon iconLogout",
