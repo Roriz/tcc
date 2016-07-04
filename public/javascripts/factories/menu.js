@@ -7,12 +7,13 @@
         menus.list = [{
           "icon": "fa fa-home",
           "name": "Inicial",
-          "href": "/home",
+          "href": "#home",
+          "selected": true,
           "displaySubmenu": false,
         }, {
           "icon": "icon iconSign",
           "name": "Licença",
-          "href": "#/",
+          "href": "#/licenciamento",
           "displaySubmenu": true,
           "subMenu": [{
             "name": "Inclusão",
@@ -45,6 +46,19 @@
           "icon": "fa fa-print",
           "name": "Relatórios",
           "displaySubmenu": false,
+          "subMenu": [{
+            "name": "Analítico de licenças",
+            "href": "#report/analitico-licencas",
+          }, {
+            "name": "dados Cadastrais",
+            "href": "#report/dados-cadastrais",
+          }, {
+            "name": "Licenças Prorrogadas",
+            "href": "#report/licencas-prorrogadas",
+          }, {
+            "name": "Licenças Vencidas",
+            "href": "#report/licencas-vencidas",
+          }],
         }, {
           "icon": "icon iconLogout",
           "name": "Sair",

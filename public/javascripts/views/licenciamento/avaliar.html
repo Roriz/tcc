@@ -1,4 +1,4 @@
-<div ng-controller="LicenciamentoAvaliacaoCtrl">
+<div ng-controller="ConsultaCtrl">
   <form name="crudForm" novalidate data-form-validate-exit ng-submit="search()">
   
     <div layout="column" ng-cloak>
@@ -18,7 +18,7 @@
           <md-content flex layout-padding>
             <div class="row">
               <div class="formField col-md-12">
-                <label for="tb_requerente.name">Processo: <required/></label>
+                <label for="ibram_processo">Processo: <required/></label>
                 <input 
                   id="ibram_processo" 
                   name="ibram_processo" 
@@ -37,9 +37,6 @@
           </md-content>
         </div>
 
-
-
-
         <div layout="column" ng-cloak ng-if="model.showDetails">
           <md-toolbar class="md-primary">
             <div class="md-toolbar-tools">
@@ -49,41 +46,48 @@
           <md-content flex layout-padding>
             <div class="row">
               <div class="formField col-md-12">
-                <label for="tb_requerente.name">Protocolo: </label>
+                <label for="tb_requerente.nome">Protocolo: </label>
                 {{model.ibram_processo}}
               </div>
             </div>
             <div class="row">
               <div class="formField col-md-12">
-                <label for="tb_requerente.name">Empresa: </label>
-                {{model.tb_requerente.name}}
+                <label for="tb_requerente.nome">Empresa: </label>
+                {{model.tb_requerente.nome}}
               </div>
             </div>
             <div class="row">
               <div class="formField col-md-12">
-                <label for="tb_requerente.name">Responsável: </label>
-                {{model.tb_requerente.responsavel}}
+                <label for="tb_requerente.nome">Responsável: </label>
+                {{model.tb_responsavel.nome}}
               </div>
             </div>
-
 
             <div class="row">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Licençca</th>
-                    <th>Data Solicitação</th>
-                    <th>Situação</th>
-                    <th>Avaliação</th>
+                    <th rowspan="2">Status</th>
+                    <th rowspan="2">Data Solicitação</th>
+                    <th rowspan="2">Data Limite</th>
+                    <th colspan="3">Última Avaliação</th>
+                    <th rowspan="2">Ações</th>
+                  </tr>
+                  <tr>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Descrição</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="status in model.tb_licenciamento_status | orderBy: '+dta' ">
-                    <td>{{status.td_tipos_licenciamento}}</td>
-                    <td>{{status.dta}}</td>
-                    <td>{{status.tb_avaliacao[0].td_tipos_avaliacao}}</td>
-                    <td>{{status.tb_avaliacao[0].description}}</td>
-                    <td><button class="btn btnDefault pull-right" ng-click="include($index)">Incluir</button></td>
+                    <td>{{status.td_situacao.td_status.nome}} - {{status.td_situacao.nome}}</td>
+                    <td>{{status.dta_inicial}}</td>
+                    <td>{{status.dta_limite}}</td>
+                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).dta : '' }}</td>
+                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).td_tipos_avaliacao.nome : '' }}</td>
+                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).observacao : '' }}</td>
+                    <td><button class="btn btnDefault pull-right" ng-click="includeAvaliacao()">Incluir</button></td>
                   </tr>
                 </tbody>
               </table>

@@ -4,7 +4,7 @@
     <div layout="column" ng-cloak>
       <md-toolbar class="md-primary">
         <div class="md-toolbar-tools">
-          <h2 class="md-flex">Incluir Licença</h2>
+          <h2 class="md-flex">Consultar</h2>
         </div>
       </md-toolbar>
       <md-content flex layout-padding>    
@@ -67,25 +67,18 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th rowspan="2">Status</th>
-                    <th rowspan="2">Data Solicitação</th>
-                    <th rowspan="2">Data Limite</th>
-                    <th colspan="3">Última Avaliação</th>
-                  </tr>
-                  <tr>
-                    <th>Data</th>
-                    <th>Tipo</th>
-                    <th>Descrição</th>
+                    <th>Status</th>
+                    <th>Situação</th>
+                    <th>Data Solicitação</th>
+                    <th>Data Limite</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="status in model.tb_licenciamento_status | orderBy: '+dta' ">
-                    <td>{{status.td_situacao.td_status.nome}} - {{status.td_situacao.nome}}</td>
+                    <td>{{status.td_situacao.td_status.nome}}</td>
+                    <td>{{status.td_situacao.nome}}</td>
                     <td>{{status.dta_inicial}}</td>
                     <td>{{status.dta_limite}}</td>
-                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).dta : '' }}</td>
-                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).td_tipos_avaliacao.nome : '' }}</td>
-                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).observacao : '' }}</td>
                   </tr>
                 </tbody>
               </table>

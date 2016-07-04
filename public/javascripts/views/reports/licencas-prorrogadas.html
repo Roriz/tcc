@@ -1,0 +1,40 @@
+<div ng-controller="ConsultaCtrl">
+  <form name="crudForm" novalidate data-form-validate-exit ng-submit="search()">
+  
+    <div layout="column" ng-cloak>
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Licenças Prorrogadas</h2>
+        </div>
+      </md-toolbar>
+      <md-content flex layout-padding>    
+
+        <div layout="column" ng-cloak>
+          <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+              <h2 class="md-flex">Filtros</h2>
+            </div>
+          </md-toolbar>
+          <md-content flex layout-padding>
+
+            <div class="row">
+              <div class="formField col-md-6">
+                <label>Data Inicial: <required/></label>
+                <md-datepicker ng-model="dta_ini" md-placeholder="__/__/____" md-max-date="dta_fim"></md-datepicker>
+              </div>
+              <div class="formField col-md-6">
+            		<label>Data Final: <required/></label>
+                <md-datepicker ng-model="dta_fim" md-placeholder="__/__/____" md-min-date="dta_ini"></md-datepicker>
+              </div>
+            </div>
+            <div class="row formButtons">
+            	<a class="btn btnDefault" target="_blank" href="/files/licencas-prorrogadas.pdf" ng-disabled="crudForm.$invalid">Gerar Relatório</a>
+            </div>
+            
+          </md-content>
+        </div>
+      </md-content>
+    </div>
+
+  </form>
+</div>

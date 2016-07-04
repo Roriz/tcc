@@ -1,10 +1,10 @@
-<div ng-controller="LicenciamentoLiLoEditCtrl">
+<div ng-controller="ConsultaCtrl">
   <form name="crudForm" novalidate data-form-validate-exit ng-submit="search()">
   
     <div layout="column" ng-cloak>
       <md-toolbar class="md-primary">
         <div class="md-toolbar-tools">
-          <h2 class="md-flex">Incluir Licença</h2>
+          <h2 class="md-flex">Incluir licença</h2>
         </div>
       </md-toolbar>
       <md-content flex layout-padding>    
@@ -37,9 +37,6 @@
           </md-content>
         </div>
 
-
-
-
         <div layout="column" ng-cloak ng-if="model.showDetails">
           <md-toolbar class="md-primary">
             <div class="md-toolbar-tools">
@@ -66,28 +63,24 @@
               </div>
             </div>
 
-
             <div class="row formButtons">
               <button class="btn btnDefault pull-right" ng-click="include(model.id)">Incluir</button>
             </div>
+
             <div class="row">
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Licençca</th>
+                    <th>Status</th>
                     <th>Data Solicitação</th>
                     <th>Data Limite</th>
-                    <th>Situação</th>
-                    <th>Avaliação</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="status in model.tb_licenciamento_status | orderBy: '+dta' ">
-                    <td>{{status.td_situacao.nome}}</td>
+                    <td>{{status.td_situacao.td_status.nome}} - {{status.td_situacao.nome}}</td>
                     <td>{{status.dta_inicial}}</td>
                     <td>{{status.dta_limite}}</td>
-                    <td>{{status.tb_avaliacao.td_tipos_avaliacao}}</td>
-                    <td>{{status.tb_avaliacao.observacao}}</td>
                   </tr>
                 </tbody>
               </table>

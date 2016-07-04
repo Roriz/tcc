@@ -1,5 +1,5 @@
 <md-dialog aria-label="Alterar Status" ng-cloak style="width:50%;">
-  <form name="crudForm" novalidate>
+  <form name="crudForm" novalidate ng-submit="answer(true)">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>Alterar Status</h2>
@@ -7,37 +7,41 @@
     </md-toolbar>
       
     <br/>
-    <md-dialog-content>
-      <!-- <md-list flex>
-        <md-subheader class="md-no-sticky">Histórico</md-subheader>
-        <md-list-item ng-repeat="value in model.tb_licenciamento_status" class="md-3-line" ng-click="null">
-          <img class="md-avatar" />
-          <div class="md-list-item-text" layout="column">
-            <h3>{{ value.td_tipos_licenciamento }}</h3>
-            <p>{{ value.dta }}</p>
-          </div>
-        </md-list-item>
-      </md-list> -->
+    <md-dialog-content style="padding: 20px;">
 
-      <div class="row">
-        <label for="prorrogacao_processo">Solicitação</label>
-      </div>
-      <div class="row">
-        <md-radio-group required ng-model="td_tipos_licenciamento">
-          <md-radio-button ng-repeat="value in tipos_licenciamento" value="{{value.name}}" ng-disabled="true" class="md-primary">{{value.name}}</md-radio-button>
-        </md-radio-group>
-      </div>
-      <div class="row">
-        <label for="prorrogacao_processo">Data</label>
-      </div>
-      <div class="row">
-        <md-datepicker ng-model="dta" md-placeholder="DD/MM/YYYY"></md-datepicker>
+      <div layout="column" ng-cloak>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Solicitação <required/></label>
+            <md-radio-group required ng-model="model.td_status_id">
+              <md-radio-button ng-repeat="value in status" value="{{value.id}}" ng-disabled="true" class="md-primary">{{value.nome}}</md-radio-button>
+            </md-radio-group>
+          </div>
+          <div class="col-md-6">
+            <label>Situação <required/></label>
+            <md-select ng-model="model.td_situacao_id" required>
+              <md-option ng-repeat="value in situacao | filter: {td_status_id: model.td_status_id}" value="{{value.id}}">
+                {{value.nome}}
+              </md-option>
+            </md-select>
+            <span class="error" ng-show="crudForm.td_situacao.$error.required">Situação está vazio</span>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <label for="prorrogacao_processo">Data <required/></label>
+        </div>
+        <div class="row">
+          <md-datepicker ng-model="model.dta_inicial" required md-placeholder="DD/MM/YYYY"></md-datepicker>
+            <span class="error" ng-show="crudForm.dta_inicial.$error.required">Data está vazio</span>
+        </div>
       </div>
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
-      <md-button ng-click="answer(true)">Salvar</md-button>
-      <md-button ng-click="answer(false)">Cancelar</md-button>
+      <button class="btn btnDefault" ng-disabled="crudForm.$invalid">Salvar</button>
+      <button type="reset" class="btn btnDanger" ng-click="answer(false)">Limpar</button>
     </md-dialog-actions>
   </form>
 </md-dialog>

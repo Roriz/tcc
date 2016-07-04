@@ -1,0 +1,46 @@
+<div ng-controller="ConsultaCtrl">
+  <form name="crudForm" novalidate data-form-validate-exit ng-submit="search()">
+  
+    <div layout="column" ng-cloak>
+      <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+          <h2 class="md-flex">Relatório de dados Cadastrais</h2>
+        </div>
+      </md-toolbar>
+      <md-content flex layout-padding>    
+
+        <div layout="column" ng-cloak>
+          <md-toolbar class="md-primary">
+            <div class="md-toolbar-tools">
+              <h2 class="md-flex">Filtros</h2>
+            </div>
+          </md-toolbar>
+          <md-content flex layout-padding>
+
+            <div class="row">
+              <div class="formField col-md-12">
+            		<label>Processo: <required/></label>
+                <input 
+                  id="ibram_processo" 
+                  name="ibram_processo" 
+                  ng-model="model.ibram_processo" 
+                  autocomplete="off" 
+                  ui-mask-placeholder  
+                  model-view-value="true" 
+                  ui-mask='9999.999/999-99' 
+                  required 
+                  ng-change="model.showDetails = false"/>
+            		<span class="error" ng-show="crudForm.cpf_cnpj.$error.required">Processo está vazio</span>
+              </div>
+            </div>
+            <div class="row formButtons">
+            	<a class="btn btnDefault" target="_blank" href="/files/dados-cadastrais.pdf" ng-disabled="crudForm.$invalid">Gerar Relatório</a>
+            </div>
+            
+          </md-content>
+        </div>
+      </md-content>
+    </div>
+
+  </form>
+</div>

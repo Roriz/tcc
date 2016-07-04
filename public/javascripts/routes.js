@@ -28,8 +28,22 @@ app.config(['$routeProvider',
       .when('/home', {
         templateUrl: '/javascripts/views/layout/home.html'
       })
-      .when('/consulta', {
-        templateUrl: '/javascripts/views/reports/consulta.html'
+
+
+    .when('/consulta', {
+      templateUrl: '/javascripts/views/reports/consulta.html'
+    })
+      .when('/report/analitico-licencas', {
+        templateUrl: '/javascripts/views/reports/analitico-licencas.html'
+      })
+      .when('/report/dados-cadastrais', {
+        templateUrl: '/javascripts/views/reports/dados-cadastrais.html'
+      })
+      .when('/report/licencas-prorrogadas', {
+        templateUrl: '/javascripts/views/reports/licencas-prorrogadas.html'
+      })
+      .when('/report/licencas-vencidas', {
+        templateUrl: '/javascripts/views/reports/licencas-vencidas.html'
       })
       .when('', {
         redirectTo: '/home'

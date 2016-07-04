@@ -78,7 +78,7 @@ layout {
 	align-items: center;
 	padding: 9px 0 9px 7px;
 }
-.menu-item.selected .menu-item-content {
+.menu-item.selected > .menu-item-content {
 	background-color: #bf3041;
 	color: #ffffff;
 }
@@ -1348,4 +1348,9 @@ h6 {
 }
 .fa-green{
 	color:green;
+}
+
+
+.md-datepicker-input-container{
+	border: 0;
 }

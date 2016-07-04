@@ -14,7 +14,7 @@ INSERT INTO licagro.td_tipo_limite (id, nome) VALUES (1, "Limite da licença"), 
 -- -- ______________________________________________________________Tabelas de dominio do USUARIO_______________________________________________
 
 -- ------------------------------------------------------------------------------------------------------ licagro.td_tipos_avaliacao
-INSERT INTO licagro.td_tipos_avaliacao (nome, dta_criacao, dta_atualizacao) VALUES ("Defirido", now(), now()), ("Indefirido", now(), now());
+INSERT INTO licagro.td_tipos_avaliacao (nome, dta_criacao, dta_atualizacao) VALUES ("Deferido", now(), now()), ("Indeferido", now(), now());
 
 
 -- ------------------------------------------------------------------------------------------------------ licagro.td_tipo_atividade

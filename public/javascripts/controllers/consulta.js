@@ -1,5 +1,5 @@
-app.controller('ConsultaCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope', '$mdDialog', 'Status', 'DateToDB', 'LicenciamentoStatus',
-  function(Licenciamento, $location, $scope, $routeParams, $rootScope, $mdDialog, Status, DateToDB, LicenciamentoStatus) {
+app.controller('ConsultaCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope', '$mdDialog', 'Status', 'Situacao', 'DateToDB', 'LicenciamentoStatus', 'Avaliacao', 'TiposAvaliacao',
+  function(Licenciamento, $location, $scope, $routeParams, $rootScope, $mdDialog, Status, Situacao, DateToDB, LicenciamentoStatus, Avaliacao, TiposAvaliacao) {
     $scope.model = new Licenciamento();
     $FatherScope = $scope;
 
@@ -14,9 +14,6 @@ app.controller('ConsultaCtrl', ['Licenciamento', '$location', '$scope', '$routeP
           d = _.first(d);
           $scope.model = _.extend($scope.model, d);
           $scope.model.showDetails = true;
-
-          console.log($scope.model.tb_licenciamento_status);
-          console.log(d.tb_licenciamento_status);
         } else {
           alertify.warning("Processo não encontrado");
         }
@@ -27,29 +24,28 @@ app.controller('ConsultaCtrl', ['Licenciamento', '$location', '$scope', '$routeP
     $scope.include = function(id) {
       $mdDialog.show({
         controller: function($scope, $mdDialog) {
-          $scope.model = new Licenciamento();
-          Status.query({}, function(r) {
-            $scope.tipos_licenciamento = r;
+          $scope.model = new LicenciamentoStatus();
+          new Status().query({}, function(r) {
+            $scope.status = r;
           });
-          $scope.dta = false;
-          Status.get($routeParams.type, function(r) {
-            $scope.td_tipos_licenciamento = r.nome;
+          new Situacao().query({}, function(r) {
+            $scope.situacao = r;
           });
+
+          $scope.model.tb_licenciamento_id = $FatherScope.model.id;
+          $scope.model.td_status_id = $routeParams.type;
+          $scope.model.dta = new Date();
 
 
           $scope.answer = function(answer) {
             if (answer) {
-              $scope.model.get(id, function(model) {
-                model.tb_licenciamento_status.push({
-                  td_tipos_licenciamento: $scope.td_tipos_licenciamento,
-                  dta: DateToDB($scope.dta)
-                });
-                $scope.model.update(model, function(r) {
-                  r.showDetails = true;
+              $scope.model.create($scope.model, function(model) {
+                $FatherScope.model.get($FatherScope.model.id, function(r) {
                   $FatherScope.model = r;
-                  $mdDialog.hide(answer);
-                  alertify.success('Licenciamento atualizado com sucesso!')
+                  $FatherScope.model.showDetails = true;
                 });
+                $mdDialog.hide(answer);
+                alertify.success('Licenciamento atualizado com sucesso!')
               });
             } else {
               $mdDialog.hide(answer);
@@ -57,6 +53,41 @@ app.controller('ConsultaCtrl', ['Licenciamento', '$location', '$scope', '$routeP
           };
         },
         templateUrl: '/javascripts/views/licenciamento/status.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true,
+        fullscreen: true
+      });
+    }
+
+    $scope.includeAvaliacao = function(id) {
+      $mdDialog.show({
+        controller: function($scope, $mdDialog) {
+          $scope.model = new Avaliacao();
+          new TiposAvaliacao().query({}, function(r) {
+            $scope.tipos_avaliacao = r;
+          });
+
+          $scope.model.tb_licenciamento_id = $FatherScope.model.id;
+          $scope.model.td_status_id = $routeParams.type;
+          $scope.model.dta = new Date();
+
+
+          $scope.answer = function(answer) {
+            if (answer) {
+              $scope.model.create($scope.model, function(model) {
+                $FatherScope.model.get($FatherScope.model.id, function(r) {
+                  $FatherScope.model = r;
+                  $FatherScope.model.showDetails = true;
+                });
+                $mdDialog.hide(answer);
+                alertify.success('Licenciamento atualizado com sucesso!')
+              });
+            } else {
+              $mdDialog.hide(answer);
+            }
+          };
+        },
+        templateUrl: '/javascripts/views/licenciamento/dialog-avaliar.html',
         parent: angular.element(document.body),
         clickOutsideToClose: true,
         fullscreen: true

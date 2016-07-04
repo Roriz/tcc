@@ -10,11 +10,13 @@ app.factory('DefaultORM', function() {
           var qLength = Object.keys(q).length;
           _.remove(db, function(n) {
             var find = 0;
-            _.each(q, function(value, key) {
-              if (n[key] && n[key] == value) {
-                find++;
-              }
-            });
+            if (n) {
+              _.each(q, function(value, key) {
+                if (n[key] && n[key] == value) {
+                  find++;
+                }
+              });
+            }
             return qLength == find ? false : true;
           });
         }
@@ -97,6 +99,17 @@ app.factory('DefaultORM', function() {
           });
         }
       },
+      createId: function() {
+        var self = this;
+        var db = self.getFactory();
+        var maxId = 1;
+        _.each(db, function(value) {
+          if (value.id > maxId) {
+            maxId = value.id;
+          }
+        });
+        return ++maxId;
+      },
 
 
 
@@ -122,8 +135,9 @@ app.factory('DefaultORM', function() {
         var self = this;
         var db = self.getFactory();
 
-        last = _.last(db);
-        model.id = last ? last.id + 1 : 0;
+        if (!model.id) {
+          model.id = self.createId();
+        }
 
         db[model.id] = model;
         self.setFactory(db);
