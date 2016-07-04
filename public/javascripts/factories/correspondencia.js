@@ -1,13 +1,13 @@
 var app = angular.module('licagro');
 
-app.factory('Correspondencia', function(DefaultORM, Locadouro) {
+app.factory('Correspondencia', function(DefaultORM, Logradouro) {
   return function() {
     var self = this;
     self.relations = [{
-      name: 'locadouro',
-      factory: Locadouro,
+      name: 'tb_logradouro',
+      factory: Logradouro,
       type: 'belongs_to'
     }];
-    self = _.extend(self, DefaultORM('correspondencia', self.relations));
+    self = _.extend(self, DefaultORM('tb_correspondencia', self.relations));
   };
 });

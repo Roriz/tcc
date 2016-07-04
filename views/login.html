@@ -51,11 +51,16 @@
 			</div>
 			
 			<div class="formButtons">
-				<button class="btn btnClear btnRow btnDefault">Entrar</button>
+				<button class="btn btnClear btnRow btnDefault">Login</button>
 			</div>
 	
 			<div class="formLinks">
-				<a href="/auth/consulta-cliente">Consulta do cliente</a>
+				<a>OU</a>
+			</div>
+
+			
+			<div class="formButtons" style="margin: 0; margin-top:40px;">
+				<a href="" class="btn btnClear btnRow btnDefault" data-gest-login>Entrar como visitante</a>
 			</div>
 
 		</form>
@@ -93,6 +98,15 @@
 				});
 				return false;
 			})
+
+			$('[data-gest-login]').on('click', function(){
+				var form = $('<form>').attr({method: 'POST', action: '/auth'});
+				form.append($('<input>').attr({name: 'username'}).val('gest'))
+				form.append($('<input>').attr({name: 'password'}).val('gest'))
+				form.trigger('submit');
+			});
+
+
 
 
 

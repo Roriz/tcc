@@ -18,7 +18,7 @@
           <md-content flex layout-padding>
             <div class="row">
               <div class="formField col-md-12">
-                <label for="tb_requerente.name">Processo: <required/></label>
+                <label for="ibram_processo">Processo: <required/></label>
                 <input 
                   id="ibram_processo" 
                   name="ibram_processo" 
@@ -26,7 +26,7 @@
                   autocomplete="off" 
                   ui-mask-placeholder  
                   model-view-value="true" 
-                  ui-mask='999999999999/999999999' 
+                  ui-mask='9999.999/999-99' 
                   required 
                   ng-change="model.showDetails = false"/>
               </div>
@@ -49,20 +49,20 @@
           <md-content flex layout-padding>
             <div class="row">
               <div class="formField col-md-12">
-                <label for="tb_requerente.name">Protocolo: </label>
+                <label for="tb_requerente.nome">Protocolo: </label>
                 {{model.ibram_processo}}
               </div>
             </div>
             <div class="row">
               <div class="formField col-md-12">
-                <label for="tb_requerente.name">Empresa: </label>
-                {{model.tb_requerente.name}}
+                <label for="tb_requerente.nome">Empresa: </label>
+                {{model.tb_requerente.nome}}
               </div>
             </div>
             <div class="row">
               <div class="formField col-md-12">
-                <label for="tb_requerente.name">Responsável: </label>
-                {{model.tb_requerente.responsavel}}
+                <label for="tb_requerente.nome">Responsável: </label>
+                {{model.tb_responsavel.nome}}
               </div>
             </div>
 
@@ -76,14 +76,16 @@
                   <tr>
                     <th>Licençca</th>
                     <th>Data Solicitação</th>
+                    <th>Data Limite</th>
                     <th>Situação</th>
                     <th>Avaliação</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="status in model.tb_licenciamento_status | orderBy: '+dta' ">
-                    <td>{{status.td_tipos_licenciamento}}</td>
-                    <td>{{status.dta}}</td>
+                    <td>{{status.td_situacao.nome}}</td>
+                    <td>{{status.dta_inicial}}</td>
+                    <td>{{status.dta_limite}}</td>
                     <td>{{status.tb_avaliacao.td_tipos_avaliacao}}</td>
                     <td>{{status.tb_avaliacao.observacao}}</td>
                   </tr>

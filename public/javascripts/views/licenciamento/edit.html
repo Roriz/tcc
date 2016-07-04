@@ -11,8 +11,8 @@
         <md-content flex layout-padding>
           <div class="row">
             <div class="formField col-md-6">
-              <md-radio-group required ng-model="model.tb_licenciamento_status[0].td_tipos_licenciamento">
-                <md-radio-button ng-repeat="value in tipos_licenciamento" disabled value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              <md-radio-group required ng-model="model.tb_licenciamento_status[0].td_status">
+                <md-radio-button ng-repeat="value in statuses" disabled value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
               </md-radio-group>
             </div>
             <div class="col-md-6">
@@ -31,7 +31,7 @@
         <md-content flex layout-padding>
           <div class="row">
             <div class="formField col-md-12">
-              <input id="ibram_processo" name="ibram_processo" ng-model="model.ibram_processo" autocomplete="off" ui-mask-placeholder  model-view-value="true" ui-mask='999999999999/999999999' required/>
+              <input id="ibram_processo" name="ibram_processo" ng-model="model.ibram_processo" autocomplete="off" ui-mask-placeholder  model-view-value="true" ui-mask='9999.999/999-99' required/>
             </div>
           </div>
         </md-content>
@@ -210,7 +210,7 @@
           <div class="formField col-md-12">
             <label for="tb_requerente.td_tipo_atividade">Tipo da atividade: <required/></label>
             <md-radio-group required layout="row" ng-model="model.tipo_atividade">
-              <md-radio-button ng-repeat="value in tipo_atividade" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              <md-radio-button ng-repeat="value in tipo_atividade" value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
             </md-radio-group>
             <span class="error" ng-show="crudForm.tb_requerente.td_tipo_atividade.$error.required">Tipo da atividade está vazio</span>
           </div>
@@ -242,28 +242,28 @@
           <div class="formField col-md-3">
             <label for="fase_empreendimento">Fase Empreendimento: <required/></label>
             <md-radio-group required ng-model="model.fase_empreendimento">
-              <md-radio-button ng-repeat="value in fase_empreendimento" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              <md-radio-button ng-repeat="value in fase_empreendimento" value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
             </md-radio-group>
             <span class="error" ng-show="crudForm.fase_empreendimento.$error.required">Tipo da Atividade está vazio</span>
           </div>
           <div class="formField col-md-3">
             <label for="situacao_imovel">Situacao imóvel: <required/></label>
             <md-radio-group required ng-model="model.situacao_imovel">
-              <md-radio-button ng-repeat="value in situacao_imovel" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              <md-radio-button ng-repeat="value in situacao_imovel" value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
             </md-radio-group>
             <span class="error" ng-show="crudForm.situacao_imovel.$error.required">Tipo da Atividade está vazio</span>
           </div>
           <div class="formField col-md-3">
             <label for="abastecimento_agua">Abastecimento Água: <required/></label>
             <md-radio-group required ng-model="model.abastecimento_agua">
-              <md-radio-button ng-repeat="value in abastecimento_agua" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              <md-radio-button ng-repeat="value in abastecimento_agua" value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
             </md-radio-group>
             <span class="error" ng-show="crudForm.abastecimento_agua.$error.required">Tipo da Atividade está vazio</span>
           </div>
           <div class="formField col-md-3">
             <label for="efluente_liquido">Efluente liquido: <required/></label>
             <md-radio-group required ng-model="model.efluente_liquido">
-              <md-radio-button ng-repeat="value in efluente_liquido" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              <md-radio-button ng-repeat="value in efluente_liquido" value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
             </md-radio-group>
             <span class="error" ng-show="crudForm.efluente_liquido.$error.required">Tipo da Atividade está vazio</span>
           </div>
@@ -273,21 +273,21 @@
           <div class="formField col-md-3">
             <label for="destino_lixo">Destino Lixo: <required/></label>
             <md-radio-group required ng-model="model.destino_lixo">
-              <md-radio-button ng-repeat="value in destino_lixo" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              <md-radio-button ng-repeat="value in destino_lixo" value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
             </md-radio-group>
             <span class="error" ng-show="crudForm.destino_lixo.$error.required">Tipo da Atividade está vazio</span>
           </div>
           <div class="formField col-md-3">
             <label for="destino_efluente">Destino efluente: <required/></label>
             <md-radio-group required ng-model="model.destino_efluente">
-              <md-radio-button ng-repeat="value in destino_efluente" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              <md-radio-button ng-repeat="value in destino_efluente" value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
             </md-radio-group>
             <span class="error" ng-show="crudForm.situacao_imovel.$error.required">Tipo da Atividade está vazio</span>
           </div>
           <div class="formField col-md-3">
             <label for="tipo_lixo_gerado">Tipo lixo gerado: <required/></label>
             <md-radio-group required ng-model="model.tipo_lixo_gerado">
-              <md-radio-button ng-repeat="value in tipo_lixo_gerado" value="{{value.name}}" class="md-primary">{{value.name}}</md-radio-button>
+              <md-radio-button ng-repeat="value in tipo_lixo_gerado" value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
             </md-radio-group>
             <span class="error" ng-show="crudForm.tipo_lixo_gerado.$error.required">Tipo da Atividade está vazio</span>
           </div>

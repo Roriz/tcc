@@ -22,7 +22,7 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
         },
       }, {
         headerName: "Nome do Requerente",
-        field: "requerente.name",
+        field: "tb_requerente.nome",
         valueGetter: function(ngGridData) {
           return _.get(ngGridData.data, ngGridData.colDef.field);
         },
@@ -33,7 +33,7 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
         },
       }, {
         headerName: "Localização",
-        field: "requerente.empreendimento.localizacao",
+        field: "tb_empreendimento.localizacao",
         hide: ISMOBILE,
         valueGetter: function(ngGridData) {
           return _.get(ngGridData.data, ngGridData.colDef.field);
@@ -45,18 +45,18 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
         },
       }, {
         headerName: "Status",
-        field: "licenciamento_status",
+        field: "tb_licenciamento_status",
         valueGetter: function(ngGridData) {
-          return $scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)).td_tipos_licenciamento;
+          return _.get($scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)), 'td_situacao.td_status.nome');
         },
         onCellClicked: function(ngGridData) {
           $scope.status(ngGridData.data.id);
         }
       }, {
         headerName: "Situação",
-        field: "licenciamento_status",
+        field: "tb_licenciamento_status",
         valueGetter: function(ngGridData) {
-          return $scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)).td_tipos_licenciamento;
+          return _.get($scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)), 'td_situacao.nome');
         },
         onCellClicked: function(ngGridData) {
           $scope.status(ngGridData.data.id);
@@ -139,9 +139,9 @@ app.controller('LicenciamentoShowCtrl', ['$scope', '$routeParams', 'Licenciament
 
 
 app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope',
-  'SituacaoImovel', 'DestinoEfluente', 'FaseEmpreendimento', 'DestinoLixo', 'EfluenteLiquido', 'AbastecimentoAgua', 'TipoLixoGerado', 'TipoAtividade', 'TiposLicenciamento',
+  'SituacaoImovel', 'DestinoEfluente', 'FaseEmpreendimento', 'DestinoLixo', 'EfluenteLiquido', 'AbastecimentoAgua', 'TipoLixoGerado', 'TipoAtividade', 'Status',
   function(Licenciamento, $location, $scope, $routeParams, $rootScope,
-    SituacaoImovel, DestinoEfluente, FaseEmpreendimento, DestinoLixo, EfluenteLiquido, AbastecimentoAgua, TipoLixoGerado, TipoAtividade, TiposLicenciamento) {
+    SituacaoImovel, DestinoEfluente, FaseEmpreendimento, DestinoLixo, EfluenteLiquido, AbastecimentoAgua, TipoLixoGerado, TipoAtividade, Status) {
     $scope.model = new Licenciamento();
     new SituacaoImovel().query({}, function(r) {
       $scope.situacao_imovel = r;
@@ -167,8 +167,8 @@ app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope',
     new TipoAtividade().query({}, function(r) {
       $scope.tipo_atividade = r;
     });
-    new TiposLicenciamento().query({}, function(r) {
-      $scope.tipos_licenciamento = r;
+    new Status().query({}, function(r) {
+      $scope.statuses = r;
     });
 
     $scope.model.tb_licenciamento_status = [];
@@ -224,8 +224,8 @@ app.controller('LicenciamentoEditCtrl', ['Licenciamento', '$location', '$scope',
 ]);
 
 
-app.controller('LicenciamentoLiLoEditCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope', '$mdDialog', 'TiposLicenciamento', 'DateToDB',
-  function(Licenciamento, $location, $scope, $routeParams, $rootScope, $mdDialog, TiposLicenciamento, DateToDB) {
+app.controller('LicenciamentoLiLoEditCtrl', ['Licenciamento', '$location', '$scope', '$routeParams', '$rootScope', '$mdDialog', 'Status', 'DateToDB',
+  function(Licenciamento, $location, $scope, $routeParams, $rootScope, $mdDialog, Status, DateToDB) {
     $scope.model = new Licenciamento();
     $FatherScope = $scope;
 
@@ -244,12 +244,12 @@ app.controller('LicenciamentoLiLoEditCtrl', ['Licenciamento', '$location', '$sco
       $mdDialog.show({
         controller: function($scope, $mdDialog) {
           $scope.model = new Licenciamento();
-          TiposLicenciamento.query({}, function(r) {
+          Status.query({}, function(r) {
             $scope.tipos_licenciamento = r;
           });
           $scope.dta = false;
-          TiposLicenciamento.get($routeParams.type, function(r) {
-            $scope.td_tipos_licenciamento = r.name;
+          Status.get($routeParams.type, function(r) {
+            $scope.td_tipos_licenciamento = r.nome;
           });
 
 
@@ -303,7 +303,7 @@ app.controller('LicenciamentoAvaliacaoCtrl', ['Licenciamento', '$location', '$sc
           $scope.model = new Licenciamento();
           TiposAvaliacao.query({}, function(r) {
             $scope.tipos_avaliacao = r;
-            $scope.td_tipos_avaliacao = r[0].name;
+            $scope.td_tipos_avaliacao = r[0].nome;
           });
           $scope.dta = new Date();
 

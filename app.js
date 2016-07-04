@@ -38,7 +38,6 @@ function startRouters(app) {
 
 function initApp() {
   var express = require('express');
-  var favicon = require('serve-favicon');
   var logger = require('morgan');
   var cookieParser = require('cookie-parser');
   var methodOverride = require('method-override');
@@ -46,7 +45,7 @@ function initApp() {
   var app = express();
   var http = require('http');
   var multipart = require('connect-multiparty');
-  var flash = require('connect-flash');
+  // var flash = require('connect-flash');
 
   var port = 3001;
 
@@ -60,9 +59,9 @@ function initApp() {
   app.set('view engine', 'html');
 
   // uncomment after placing your favicon in /public
-  app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+  // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
   app.use(logger('dev'));
-  app.use(flash());
+  // app.use(flash());
   app.use(cookieParser());
   app.use(bodyParser.urlencoded({
     extended: false,
@@ -113,7 +112,14 @@ function initApp() {
       if (username && password && username == 'admin' && password == 'admin') {
         return done(null, {
           name: 'Admin',
-          email: 'admin@gmail.com'
+          email: 'admin@gmail.com',
+          type: 1
+        });
+      } else if (username && password && username == 'gest' && password == 'gest') {
+        return done(null, {
+          name: 'Convidado',
+          email: 'convidado@licagro.com.br',
+          type: 2
         });
       } else {
         return done({

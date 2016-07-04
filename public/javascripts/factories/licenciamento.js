@@ -2,86 +2,90 @@ var app = angular.module('licagro');
 
 app.factory('Licenciamento', function(
   DefaultORM,
-  TiposLicenciamento, Requerente, TipoAtividade, FaseEmpreendimento,
+  Status, Requerente, TipoAtividade, FaseEmpreendimento,
   SituacaoImovel, AbastecimentoAgua, EfluenteLiquido,
-  DestinoLixo, DestinoEfluente, TipoLixoGerado, LicenciamentoStatus
+  DestinoLixo, DestinoEfluente, TipoLixoGerado, LicenciamentoStatus,
+  Responsavel, Correspondencia, Empreendimento
 ) {
-  var tipos_licenciamento = new TiposLicenciamento();
-  var LICENCA_PREVIA = false;
-  tipos_licenciamento.get(1, function(r) {
-    LICENCA_PREVIA = r.name;
-  });
-  var LICENCA_INSTALACAO = false;
-  tipos_licenciamento.get(2, function(r) {
-    LICENCA_INSTALACAO = r.name;
-  });
-  var LICENCA_OPERACAO = false;
-  tipos_licenciamento.get(3, function(r) {
-    LICENCA_OPERACAO = r.name;
-  });
+  var tipos_licenciamento = new Status();
+  var LICENCA_PREVIA = 1;
+  var LICENCA_INSTALACAO = 2;
+  var LICENCA_OPERACAO = 3;
   return function() {
     var self = this;
     self.relations = [{
-      name: 'requerente',
+      name: 'tb_correspondencia',
+      factory: Correspondencia,
+      type: 'belongs_to'
+    }, {
+      name: 'tb_empreendimento',
+      factory: Empreendimento,
+      type: 'belongs_to'
+    }, {
+      name: 'tb_responsavel',
+      factory: Responsavel,
+      type: 'belongs_to'
+    }, {
+      name: 'tb_requerente',
       factory: Requerente,
       type: 'belongs_to'
     }, {
-      name: 'tipo_atividade',
+      name: 'td_tipo_atividade',
       factory: TipoAtividade,
       type: 'belongs_to'
     }, {
-      name: 'fase_empreendimento',
+      name: 'td_fase_empreendimento',
       factory: FaseEmpreendimento,
       type: 'belongs_to'
     }, {
-      name: 'situacao_imovel',
+      name: 'td_situacao_imovel',
       factory: SituacaoImovel,
       type: 'belongs_to'
     }, {
-      name: 'abastecimento_agua',
+      name: 'td_abastecimento_agua',
       factory: AbastecimentoAgua,
       type: 'belongs_to'
     }, {
-      name: 'efluente_liquido',
+      name: 'td_efluente_liquido',
       factory: EfluenteLiquido,
       type: 'belongs_to'
     }, {
-      name: 'destino_lixo',
+      name: 'td_destino_lixo',
       factory: DestinoLixo,
       type: 'belongs_to'
     }, {
-      name: 'destino_efluente',
+      name: 'td_destino_efluente',
       factory: DestinoEfluente,
       type: 'belongs_to'
     }, {
-      name: 'tipo_lixo_gerado',
+      name: 'td_tipo_lixo_gerado',
       factory: TipoLixoGerado,
       type: 'belongs_to'
     }, {
-      name: 'licenciamento_status',
+      name: 'tb_licenciamento_status',
       factory: LicenciamentoStatus,
       type: 'has_many'
     }];
 
     self.can_prorrogar = function(lic) {
-      if (self.last_status(lic.licenciamento_status).td_tipos_licenciamento == LICENCA_PREVIA ||
-        self.last_status(lic.licenciamento_status).td_tipos_licenciamento == LICENCA_INSTALACAO) {
+      if (self.last_status(lic.tb_licenciamento_status).td_situacao.td_status.id == LICENCA_PREVIA ||
+        self.last_status(lic.tb_licenciamento_status).td_situacao.td_status.id == LICENCA_INSTALACAO) {
         return true;
       }
       return false;
     }
     self.can_renovar = function(lic) {
-      if (self.last_status(lic.licenciamento_status).td_tipos_licenciamento == LICENCA_OPERACAO) {
+      if (self.last_status(lic.tb_licenciamento_status).td_situacao.td_status.id == LICENCA_OPERACAO) {
         return true;
       }
       return false;
     }
-    self.last_status = function(licenciamento_status) {
-      licenciamento_status = _.sortBy(licenciamento_status, function(o) {
+    self.last_status = function(tb_licenciamento_status) {
+      tb_licenciamento_status = _.sortBy(tb_licenciamento_status, function(o) {
         return _.get(o, 'dta');
       });
-      return _.last(licenciamento_status);
+      return _.last(tb_licenciamento_status);
     };
-    self = _.extend(self, DefaultORM('licenciamento', self.relations));
+    self = _.extend(self, DefaultORM('tb_licenciamento', self.relations));
   };
 });

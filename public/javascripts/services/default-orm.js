@@ -35,32 +35,35 @@ app.factory('DefaultORM', function() {
             if (relation.type == 'belongs_to') {
               sync++;
 
-              new relation.factory().query({
-                id: model[relation.name + '_id']
-              }, function(d) {
-                new relation.factory().as_json(_.first(d), function(resp) {
-                  model[relation.name] = resp;
+              new relation.factory().get(model[relation.name + '_id'], function(d) {
+                if (d) {
+                  d.parent_model = model.parent_model ? model.parent_model : [];
+                  d.parent_model.push(modelName);
 
+                  model[relation.name] = d;
                   if (self.relations.length <= sync) {
                     cb(model);
                   }
-
-                });
+                } else {
+                  if (self.relations.length <= sync) {
+                    cb(model);
+                  }
+                }
               });
 
             } else if (relation.type == 'has_many') {
 
               sync++;
               new relation.factory().query(_.set({}, modelName + '_id', model.id), function(d) {
-                if (d) {
-                  new relation.factory().as_json(d, function(resp) {
-                    model[relation.name] = resp;
-
-                    if (self.relations.length <= sync) {
-                      cb(model);
-                    }
-
-                  });
+                if (d.length) {
+                  model[relation.name] = d;
+                  if (self.relations.length <= sync) {
+                    cb(model);
+                  }
+                } else {
+                  if (self.relations.length <= sync) {
+                    cb(model);
+                  }
                 }
               });
 
@@ -96,7 +99,9 @@ app.factory('DefaultORM', function() {
       query: function(q, cb) {
         var self = this;
         var db = self.getFactory();
-        cb(self.search(q, db));
+        self.as_json(self.search(q, db), function(d) {
+          cb(d);
+        });
       },
       get: function(id, cb) {
         var self = this;

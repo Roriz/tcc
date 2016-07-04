@@ -3,48 +3,61 @@
     app.factory('menus', function() {
       var menus = {};
       menus.bread = [];
-      menus.list = [{
-        "icon": "icon iconSign",
-        "name": "Licença",
-        "href": "#/",
-        "displaySubmenu": true,
-        "subMenu": [{
-          "name": "Inclusão",
+      if (window.CURRENTUSER.type == 1) {
+        menus.list = [{
+          "icon": "icon iconSign",
+          "name": "Licença",
+          "href": "#/",
           "displaySubmenu": true,
-          "icon": "fa fa-plus",
           "subMenu": [{
-            "icon": "fa fa-newspaper-o fa-blue",
-            "name": "Licença Prévia",
-            "href": "#/licenciamento/edit",
-          }, {
-            "icon": "fa fa-newspaper-o fa-green",
-            "name": "Licença de Instalação",
-            "href": "#licenciamento/edit-li-lo?type=2",
-          }, {
-            "icon": "fa fa-newspaper-o fa-red",
-            "name": "Licença de Operação",
-            "href": "#licenciamento/edit-li-lo?type=3",
+            "name": "Inclusão",
+            "displaySubmenu": true,
+            "icon": "fa fa-plus",
+            "subMenu": [{
+              "icon": "fa fa-newspaper-o fa-blue",
+              "name": "Licença Prévia",
+              "href": "#/licenciamento/edit",
+            }, {
+              "icon": "fa fa-newspaper-o fa-green",
+              "name": "Licença de Instalação",
+              "href": "#licenciamento/edit-li-lo?type=2",
+            }, {
+              "icon": "fa fa-newspaper-o fa-red",
+              "name": "Licença de Operação",
+              "href": "#licenciamento/edit-li-lo?type=3",
+            }]
           }]
-        }]
-      }, {
-        "icon": "fa fa-external-link-square",
-        "name": "Emitir Licença",
-        "displaySubmenu": false,
-      }, {
-        "icon": "fa fa-search",
-        "name": "Avaliação",
-        "displaySubmenu": false,
-        "href": '#licenciamento/avaliar',
-      }, {
-        "icon": "fa fa-print",
-        "name": "Relatórios",
-        "displaySubmenu": false,
-      }, {
-        "icon": "icon iconLogout",
-        "name": "Sair",
-        "displaySubmenu": false,
-        "href": "/auth/logout"
-      }];
+        }, {
+          "icon": "fa fa-external-link-square",
+          "name": "Emitir Licença",
+          "displaySubmenu": false,
+        }, {
+          "icon": "fa fa-search",
+          "name": "Avaliação",
+          "displaySubmenu": false,
+          "href": '#licenciamento/avaliar',
+        }, {
+          "icon": "fa fa-print",
+          "name": "Relatórios",
+          "displaySubmenu": false,
+        }, {
+          "icon": "icon iconLogout",
+          "name": "Sair",
+          "displaySubmenu": false,
+          "href": "/auth/logout"
+        }];
+      } else if (window.CURRENTUSER.type == 2) {
+        menus.list = [{
+          "icon": "fa fa-external-link-square",
+          "name": "Consulta",
+          "displaySubmenu": false,
+        }, {
+          "icon": "icon iconLogout",
+          "name": "Sair",
+          "displaySubmenu": false,
+          "href": "/auth/logout"
+        }];
+      }
       menus.selectMenu = function(dom) {
         if (dom.target) {
           dom = dom.target;

@@ -17,9 +17,7 @@
     "morgan": "~1.6.1",
     "passport": "",
     "passport-local": "",
-    "connect-flash": "",
-    "serve-favicon": "~2.3.0",
-    "node-xlsx": ""
+    "sqljs": ""
   },
   "devDependencies": {
     "nodemon": "^1.8.0"

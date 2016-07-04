@@ -25,15 +25,19 @@ app.config(['$routeProvider',
       .when('/licenciamento/avaliar', {
         templateUrl: '/javascripts/views/licenciamento/avaliar.html'
       })
+      .when('/home', {
+        templateUrl: '/javascripts/views/layout/home.html'
+      })
       .when('', {
-        redirectTo: '/licenciamento'
+        redirectTo: '/home'
       })
       .when('/', {
-        redirectTo: '/licenciamento'
+        redirectTo: '/home'
       })
       .otherwise({
         templateUrl: '/javascripts/views/errors/404.html',
       });
+
   }
 ])
   .run(['$rootScope', '$location', 'menus', '$routeParams', '$route',
