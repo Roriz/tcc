@@ -30,6 +30,10 @@ app.config(['$routeProvider',
       })
 
 
+    .when('/emitir-licenca', {
+      templateUrl: '/javascripts/views/reports/emitir-licenca.html'
+    })
+
     .when('/consulta', {
       templateUrl: '/javascripts/views/reports/consulta.html'
     })

@@ -37,6 +37,7 @@
           "icon": "fa fa-external-link-square",
           "name": "Emitir Licença",
           "displaySubmenu": false,
+          "href": '#emitir-licenca',
         }, {
           "icon": "fa fa-search",
           "name": "Avaliação",
@@ -45,7 +46,7 @@
         }, {
           "icon": "fa fa-print",
           "name": "Relatórios",
-          "displaySubmenu": false,
+          "displaySubmenu": true,
           "subMenu": [{
             "name": "Analítico de licenças",
             "href": "#report/analitico-licencas",

@@ -5,11 +5,7 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
     $scope.model = new Licenciamento();
 
     $scope.dataGrid = {
-      buttons: [{
-        href: '#licenciamento/edit',
-        name: 'Criar Novo',
-        class: 'btn btnDefault'
-      }],
+      buttons: [],
       modelName: 'licenciamento',
       collection: Licenciamento,
       columnDefs: [{
@@ -83,6 +79,20 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
       }]
     };
 
+    var saveDialog = function(answer, attrs) {
+      if (answer) {
+        Licenciamento.get(id, function(model) {
+          model = _.extend(model, attrs);
+          Licenciamento.update(model, function() {
+            $mdDialog.hide(answer);
+            alertify.success('Licenciamento atualizado com sucesso!')
+          });
+        });
+      } else {
+        $mdDialog.hide(answer);
+      }
+    }
+
     $scope.renovar = function(id) {
       $mdDialog.show({
         controller: function($scope, $mdDialog) {
@@ -99,9 +109,7 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
         fullscreen: true
       });
     }
-    this.prorrogar = function(id) {
-      console.log('prorrogar');
-    }
+
     $scope.prorrogar = function(id) {
       $mdDialog.show({
         controller: function($scope, $mdDialog) {

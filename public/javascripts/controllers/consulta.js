@@ -13,6 +13,7 @@ app.controller('ConsultaCtrl', ['Licenciamento', '$location', '$scope', '$routeP
         if (d.length) {
           d = _.first(d);
           $scope.model = _.extend($scope.model, d);
+          $scope.model.status_last = $scope.model.last_status($scope.model.tb_licenciamento_status);
           $scope.model.showDetails = true;
         } else {
           alertify.warning("Processo não encontrado");

@@ -39,7 +39,7 @@
               <div class="formField col-md-6">
             		<label>Situação: <required/></label>
                 <md-select ng-model="td_situacao_id" required>
-                  <md-option ng-repeat="value in situacao | filter: {td_status_id: td_status_id}" value="{{value.id}}">
+                  <md-option ng-repeat="value in situacao | filter: {td_status_id: td_status_id}" ng-disabled="!td_status_id" value="{{value.id}}">
                     {{value.nome}}
                   </md-option>
                 </md-select>
