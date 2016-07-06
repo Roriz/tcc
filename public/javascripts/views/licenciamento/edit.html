@@ -2,7 +2,7 @@
   <form name="crudForm" novalidate data-form-validate-exit ng-submit="send(model)">
     
     <div class="row">
-      <div layout="column" ng-cloak class="col-md-6">
+      <div layout="column" ng-cloak class="col-md-6 hide">
         <md-toolbar class="md-primary">
           <div class="md-toolbar-tools">
             <h2 class="md-flex">Solicitação para obtenção</h2>
@@ -22,13 +22,18 @@
         </md-content>
       </div>
 
-      <div layout="column" ng-cloak class="col-md-6">
+      <div layout="column" ng-cloak class="col-md-12">
         <md-toolbar class="md-primary">
           <div class="md-toolbar-tools">
             <h2 class="md-flex">PROCESSO Nº</h2>
           </div>
         </md-toolbar>
         <md-content flex layout-padding>
+          <div class="row hide">
+            <div class="formField col-md-6">
+              <md-datepicker ng-model="model.tb_licenciamento_status[0].dta" class="col-md-12" required md-placeholder="DD/MM/YYYY"></md-datepicker>
+            </div>
+          </div>
           <div class="row">
             <div class="formField col-md-12">
               <input id="ibram_processo" name="ibram_processo" ng-model="model.ibram_processo" autocomplete="off" ui-mask-placeholder  model-view-value="true" ui-mask='9999.999/999-99' required/>
@@ -207,22 +212,26 @@
       </md-toolbar>
       <md-content flex layout-padding>
         <div class="row">
-          <div class="formField col-md-12">
+          <div class="formField col-md-6">
             <label for="tb_requerente.td_tipo_atividade">Tipo da atividade: <required/></label>
-            <md-radio-group required layout="row" ng-model="model.tipo_atividade">
-              <md-radio-button ng-repeat="value in tipo_atividade" value="{{value.nome}}" class="md-primary">{{value.nome}}</md-radio-button>
-            </md-radio-group>
+
+            <md-select ng-model="model.tipo_atividade_id" required>
+              <md-option ng-repeat="value in tipo_atividade" value="{{value.id}}">
+                {{value.nome}}
+              </md-option>
+            </md-select>
             <span class="error" ng-show="crudForm.tb_requerente.td_tipo_atividade.$error.required">Tipo da atividade está vazio</span>
           </div>
-        </div>
 
-        <div class="row">
-          <div class="formField col-md-2">
+          <div class="formField col-md-6">
             <label for="tb_requerente.atividade_area">Área: <required/></label>
             <input type="number" id="atividade_area" id="tb_requerente.atividade_area" name="tb_requerente.atividade_area" ng-model="model.tb_requerente.atividade_area" autocomplete="off" required/>
             <span class="error" ng-show="crudForm.tb_requerente.atividade_area.$error.required">Bairro está vazio</span>
           </div>
-          <div class="formField col-md-10">
+        </div>
+
+        <div class="row">
+          <div class="formField col-md-12">
             <label for="tb_requerente.atividade_descricao">Descrição resumida das atividades: <required/></label>
             <textarea id="atividade_area" id="tb_requerente.atividade_descricao" name="tb_requerente.atividade_descricao" ng-model="model.tb_requerente.atividade_descricao" autocomplete="off" rows="5"/></textarea>
             <span class="error" ng-show="crudForm.tb_requerente.atividade_descricao.$error.required">Descrição resumida das atividades está vazio</span>
