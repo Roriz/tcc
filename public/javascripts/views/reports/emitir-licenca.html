@@ -88,7 +88,7 @@
                     <td>{{ model.takeLastStatus(value.id).tb_avaliacao ? takeLastAvaliacao(model.takeLastStatus(value.id).tb_avaliacao).dta : '' }}</td>
                     <td>{{ model.takeLastStatus(value.id).tb_avaliacao ? takeLastAvaliacao(model.takeLastStatus(value.id).tb_avaliacao).td_tipos_avaliacao.nome : '' }}</td>
                     <td>{{ model.takeLastStatus(value.id).tb_avaliacao ? takeLastAvaliacao(model.takeLastStatus(value.id).tb_avaliacao).observacao : '' }}</td>
-                    <td><a target="_blank" href="/files/{{ model.takeLastStatus(value.id) ? value.sigla : '' }}.pdf" class="btn btnDefault pull-right">Emitir</a></td>
+                    <td><a target="_blank" href="/files/{{ value.sigla | lowercase }}.pdf" class="btn btnDefault pull-right">Emitir</a></td>
                   </tr>
                 </tbody>
               </table>
