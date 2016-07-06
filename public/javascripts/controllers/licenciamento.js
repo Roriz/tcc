@@ -9,55 +9,56 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
       modelName: 'licenciamento',
       collection: Licenciamento,
       columnDefs: [{
-        headerName: "Processo",
-        field: "ibram_processo",
-        onCellClicked: function(ngGridData) {
-          $scope.$apply(function() {
-            $location.path('/licenciamento/show/' + ngGridData.data.id);
-          })
+          headerName: "Processo",
+          field: "ibram_processo",
+          onCellClicked: function(ngGridData) {
+            $scope.$apply(function() {
+              $location.path('/licenciamento/show/' + ngGridData.data.id);
+            })
+          },
+        }, {
+          headerName: "Nome do Requerente",
+          field: "tb_requerente.nome",
+          valueGetter: function(ngGridData) {
+            return _.get(ngGridData.data, ngGridData.colDef.field);
+          },
+          onCellClicked: function(ngGridData) {
+            $scope.$apply(function() {
+              $location.path('/licenciamento/show/' + ngGridData.data.id);
+            });
+          },
+        }, {
+          headerName: "Localização",
+          field: "tb_empreendimento.localizacao",
+          hide: ISMOBILE,
+          valueGetter: function(ngGridData) {
+            return _.get(ngGridData.data, ngGridData.colDef.field);
+          },
+          onCellClicked: function(ngGridData) {
+            $scope.$apply(function() {
+              $location.path('/licenciamento/show/' + ngGridData.data.id);
+            })
+          },
+        }, {
+          headerName: "Status",
+          field: "tb_licenciamento_status",
+          valueGetter: function(ngGridData) {
+            return _.get($scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)), 'td_situacao.td_status.nome');
+          },
+          onCellClicked: function(ngGridData) {
+            $scope.status(ngGridData.data.id);
+          }
+        }, {
+          headerName: "Situação",
+          field: "tb_licenciamento_status",
+          valueGetter: function(ngGridData) {
+            return _.get($scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)), 'td_situacao.nome');
+          },
+          onCellClicked: function(ngGridData) {
+            $scope.status(ngGridData.data.id);
+          }
         },
-      }, {
-        headerName: "Nome do Requerente",
-        field: "tb_requerente.nome",
-        valueGetter: function(ngGridData) {
-          return _.get(ngGridData.data, ngGridData.colDef.field);
-        },
-        onCellClicked: function(ngGridData) {
-          $scope.$apply(function() {
-            $location.path('/licenciamento/show/' + ngGridData.data.id);
-          });
-        },
-      }, {
-        headerName: "Localização",
-        field: "tb_empreendimento.localizacao",
-        hide: ISMOBILE,
-        valueGetter: function(ngGridData) {
-          return _.get(ngGridData.data, ngGridData.colDef.field);
-        },
-        onCellClicked: function(ngGridData) {
-          $scope.$apply(function() {
-            $location.path('/licenciamento/show/' + ngGridData.data.id);
-          })
-        },
-      }, {
-        headerName: "Status",
-        field: "tb_licenciamento_status",
-        valueGetter: function(ngGridData) {
-          return _.get($scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)), 'td_situacao.td_status.nome');
-        },
-        onCellClicked: function(ngGridData) {
-          $scope.status(ngGridData.data.id);
-        }
-      }, {
-        headerName: "Situação",
-        field: "tb_licenciamento_status",
-        valueGetter: function(ngGridData) {
-          return _.get($scope.model.last_status(_.get(ngGridData.data, ngGridData.colDef.field)), 'td_situacao.nome');
-        },
-        onCellClicked: function(ngGridData) {
-          $scope.status(ngGridData.data.id);
-        }
-      }, {
+        // {
         //     headerName: "Actions",
         //     field: "id",
         //     cellRenderer: function(params) {
@@ -67,16 +68,17 @@ app.controller('LicenciamentoListCtrl', ['$scope', 'Licenciamento', '$location',
         //     }
         //   }]
         // };
-        headerName: "Actions",
-        field: "id",
-        cellRenderer: function(params) {
-          params.$scope.prorrogar = $scope.prorrogar;
-          params.$scope.renovar = $scope.renovar;
-          var prorrogar = $scope.model.can_prorrogar(params.data) ? '<md-button class="md-warn md-raised" ng-click="prorrogar(' + params.data.id + ')">Prorrogar</md-button>' : '';
-          var renovar = $scope.model.can_renovar(params.data) ? '<md-button class="md-warn md-raised" ng-click="renovar(' + params.data.id + ')">Renovar</md-button>' : '';
-          return renovar + prorrogar;
-        }
-      }]
+        // headerName: "Actions",
+        // field: "id",
+        // cellRenderer: function(params) {
+        //   params.$scope.prorrogar = $scope.prorrogar;
+        //   params.$scope.renovar = $scope.renovar;
+        //   var prorrogar = $scope.model.can_prorrogar(params.data) ? '<md-button class="md-warn md-raised" ng-click="prorrogar(' + params.data.id + ')">Prorrogar</md-button>' : '';
+        //   var renovar = $scope.model.can_renovar(params.data) ? '<md-button class="md-warn md-raised" ng-click="renovar(' + params.data.id + ')">Renovar</md-button>' : '';
+        //   return renovar + prorrogar;
+        // }
+        // }
+      ]
     };
 
     var saveDialog = function(answer, attrs) {

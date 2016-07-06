@@ -68,6 +68,7 @@
                 <thead>
                   <tr>
                     <th rowspan="2">Status</th>
+                    <th rowspan="2">Situação</th>
                     <th rowspan="2">Data Solicitação</th>
                     <th rowspan="2">Data Limite</th>
                     <th colspan="3">Última Avaliação</th>
@@ -79,22 +80,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="status in model.tb_licenciamento_status | orderBy: '+dta' ">
-                    <td>{{status.td_situacao.td_status.nome}} - {{status.td_situacao.nome}}</td>
-                    <td>{{status.dta_inicial}}</td>
-                    <td>{{status.dta_limite}}</td>
-                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).dta : '' }}</td>
-                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).td_tipos_avaliacao.nome : '' }}</td>
-                    <td>{{ status.tb_avaliacao ? takeLastAvaliacao(status.tb_avaliacao).observacao : '' }}</td>
+                  <tr ng-repeat="value in status">
+                    <td>{{ value.nome }}</td>
+                    <td>{{ model.takeLastStatus(value.id).td_situacao.nome }}</td>
+                    <td>{{ model.takeLastStatus(value.id).dta_inicial }}</td>
+                    <td>{{ model.takeLastStatus(value.id).dta_limite }}</td>
+                    <td>{{ model.takeLastStatus(value.id).tb_avaliacao ? takeLastAvaliacao(model.takeLastStatus(value.id).tb_avaliacao).dta : '' }}</td>
+                    <td>{{ model.takeLastStatus(value.id).tb_avaliacao ? takeLastAvaliacao(model.takeLastStatus(value.id).tb_avaliacao).td_tipos_avaliacao.nome : '' }}</td>
+                    <td>{{ model.takeLastStatus(value.id).tb_avaliacao ? takeLastAvaliacao(model.takeLastStatus(value.id).tb_avaliacao).observacao : '' }}</td>
+                    <td><a target="_blank" href="/files/{{ model.takeLastStatus(value.id) ? value.sigla : '' }}.pdf" class="btn btnDefault pull-right">Emitir</a></td>
                   </tr>
                 </tbody>
               </table>
-            </div>
-
-            <div class="row formButtons">
-              <a ng-if="model.status_last.td_situacao.td_status.id == 1" target="_blank" href="/files/lp.pdf" class="btn btnDefault pull-right">Emitir</a>
-              <a ng-if="model.status_last.td_situacao.td_status.id == 2" target="_blank" href="/files/li.pdf" class="btn btnDefault pull-right">Emitir</a>
-              <a ng-if="model.status_last.td_situacao.td_status.id == 3" target="_blank" href="/files/lo.pdf" class="btn btnDefault pull-right">Emitir</a>
             </div>
 
           </md-content>

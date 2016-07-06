@@ -2,6 +2,12 @@ app.controller('ConsultaCtrl', ['Licenciamento', '$location', '$scope', '$routeP
   function(Licenciamento, $location, $scope, $routeParams, $rootScope, $mdDialog, Status, Situacao, DateToDB, LicenciamentoStatus, Avaliacao, TiposAvaliacao) {
     $scope.model = new Licenciamento();
     $FatherScope = $scope;
+    new Status().query({}, function(r) {
+      $scope.status = r;
+    });
+    new Situacao().query({}, function(r) {
+      $scope.situacao = r;
+    });
 
     $scope.takeLastAvaliacao = function(tb_avaliacao) {
       return new LicenciamentoStatus().last_avaliacao(tb_avaliacao);

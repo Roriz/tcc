@@ -86,6 +86,15 @@ app.factory('Licenciamento', function(
       });
       return _.last(tb_licenciamento_status);
     };
+    self.takeLastStatus = function(td_status_id) {
+      var licences = [];
+      _.each(self.tb_licenciamento_status, function(tb_licenciamento_status) {
+        if (_.get(tb_licenciamento_status, 'td_situacao.td_status.id') == td_status_id) {
+          licences.push(tb_licenciamento_status);
+        }
+      });
+      return self.last_status(licences);
+    };
     self = _.extend(self, DefaultORM('tb_licenciamento', self.relations));
   };
 });
